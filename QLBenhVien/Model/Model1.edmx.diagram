@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c4fac3a8e72242368cd3ea4b0ac602de" Name="Diagram1">
+        <EntityTypeShape EntityType="QLBenhVienModel.BHYT" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="QLBenhVienModel.HospitalFee" Width="1.5" PointX="8.25" PointY="3.375" />
+        <EntityTypeShape EntityType="QLBenhVienModel.Location" Width="1.5" PointX="3.75" PointY="9" />
+        <EntityTypeShape EntityType="QLBenhVienModel.MedicalRecord" Width="1.5" PointX="6" PointY="2.625" />
+        <EntityTypeShape EntityType="QLBenhVienModel.Medicine" Width="1.5" PointX="3.75" PointY="14.625" />
+        <EntityTypeShape EntityType="QLBenhVienModel.Patient" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="QLBenhVienModel.Prescription" Width="1.5" PointX="3.75" PointY="11.5" />
+        <EntityTypeShape EntityType="QLBenhVienModel.QuantityMedicine" Width="1.5" PointX="6" PointY="11.375" />
+        <EntityTypeShape EntityType="QLBenhVienModel.Sick" Width="1.5" PointX="3.75" PointY="6.625" />
+        <EntityTypeShape EntityType="QLBenhVienModel.sysdiagram" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="QLBenhVienModel.User" Width="1.5" PointX="5.75" PointY="6.75" />
+        <AssociationConnector Association="QLBenhVienModel.FK_BHYT_Patient" />
+        <AssociationConnector Association="QLBenhVienModel.FK_HospitalFee_MedicalRecord" />
+        <AssociationConnector Association="QLBenhVienModel.FK_MedicalRecord_Location" />
+        <AssociationConnector Association="QLBenhVienModel.FK_MedicalRecord_Patient" />
+        <AssociationConnector Association="QLBenhVienModel.FK_MedicalRecord_Prescription" />
+        <AssociationConnector Association="QLBenhVienModel.FK_MedicalRecord_Sick" />
+        <AssociationConnector Association="QLBenhVienModel.FK_QuantityMedicine_Medicine" />
+        <AssociationConnector Association="QLBenhVienModel.FK_QuantityMedicine_Prescription" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

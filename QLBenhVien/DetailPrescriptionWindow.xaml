@@ -1,0 +1,133 @@
+﻿<Window x:Class="QLBenhVien.DetailPrescriptionWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLBenhVien"
+        mc:Ignorable="d"
+        
+        xmlns:uc="clr-namespace:QLBenhVien.UserControlD"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        
+        Name="window"
+        DataContext="{StaticResource DetailPrescriptionVM}"
+        Title="Chi tiết đơn thuốc" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:Card Grid.Column="0" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+
+                    <!--Element binding selected item-->
+                    <materialDesign:Card Grid.Row="0" Margin="5">
+                        <WrapPanel>
+                            <TextBox Text="{Binding DisplayNameMedicine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tên thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Text="{Binding PriceMedicine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Giá tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </WrapPanel>
+                    </materialDesign:Card>
+                    <materialDesign:Card Grid.Row="1" Margin="5">
+                        <WrapPanel>
+                            <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
+                        </WrapPanel>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Grid.Row="2" VerticalAlignment="Stretch">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView ItemsSource="{Binding Medicine}" SelectedItem="{Binding SelectedMedicine, Mode=TwoWay}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Tên thuốc" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                        <GridViewColumn Header="Giá tiền" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </materialDesign:Card>
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Column="2" Margin="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid Grid.Row="0">
+                        <WrapPanel>
+                            <TextBox Name="IdPrescription" Text="{Binding IdPrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Mã đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Name="DisplayNamePrescription" Text="{Binding DisplayNamePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tên đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Name="TotalPricePrescription" Text="{Binding TotalPricePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tổng tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </WrapPanel>
+                    </Grid>
+
+                    <materialDesign:Card Grid.Row="1" Margin="5">
+                        <WrapPanel>
+                            <TextBox Text="{Binding QuantityInPrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </WrapPanel>
+                    </materialDesign:Card>
+
+                    <materialDesign:Card Grid.Row="2" Margin="5">
+                        <WrapPanel>
+                            <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="100"></Button>
+                            <Button Command="{Binding DeleteCommand}" Content="Xóa" Margin="5" Width="100"></Button>
+                        </WrapPanel>
+                    </materialDesign:Card>
+
+                    <Grid Grid.Row="3">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Tên thuốc" DisplayMemberBinding="{Binding Medicine.DisplayName}"></GridViewColumn>
+                                        <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Quantity}"></GridViewColumn>
+                                        <GridViewColumn Header="Giá tiền" DisplayMemberBinding="{Binding Price}"></GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Window>

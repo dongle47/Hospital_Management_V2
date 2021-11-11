@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLBenhVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BHYT">
+    <Key>
+      <PropertyRef Name="IdPatient" />
+    </Key>
+    <Property Name="IdPatient" Type="int" Nullable="false" />
+    <Property Name="CodeBHYT" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateStart" Type="date" />
+    <Property Name="DateEnd" Type="date" />
+    <Property Name="Reduction" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="HospitalFee">
+    <Key>
+      <PropertyRef Name="IdMedicalRecord" />
+    </Key>
+    <Property Name="IdMedicalRecord" Type="int" Nullable="false" />
+    <Property Name="TotalFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Owed" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Location">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedicalRecord">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPatient" Type="int" Nullable="false" />
+    <Property Name="IdSick" Type="int" Nullable="false" />
+    <Property Name="IdPrescription" Type="int" />
+    <Property Name="IdLocation" Type="int" Nullable="false" />
+    <Property Name="DateIn" Type="date" />
+    <Property Name="DateOut" Type="date" />
+  </EntityType>
+  <EntityType Name="Medicine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Patient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="50" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="10" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Religion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Prescription">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateCreated" Type="date" />
+    <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="QuantityMedicine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdPrescription" Type="int" Nullable="false" />
+    <Property Name="IdMedicine" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sick">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DisplayName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdRole" Type="int" />
+  </EntityType>
+  <Association Name="FK_BHYT_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="BHYT" Type="Self.BHYT" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BHYT">
+        <PropertyRef Name="IdPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HospitalFee_MedicalRecord">
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="1" />
+    <End Role="HospitalFee" Type="Self.HospitalFee" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="MedicalRecord">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HospitalFee">
+        <PropertyRef Name="IdMedicalRecord" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalRecord_Location">
+    <End Role="Location" Type="Self.Location" Multiplicity="1" />
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Location">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicalRecord">
+        <PropertyRef Name="IdLocation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalRecord_Patient">
+    <End Role="Patient" Type="Self.Patient" Multiplicity="1" />
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicalRecord">
+        <PropertyRef Name="IdPatient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalRecord_Prescription">
+    <End Role="Prescription" Type="Self.Prescription" Multiplicity="0..1" />
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicalRecord">
+        <PropertyRef Name="IdPrescription" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedicalRecord_Sick">
+    <End Role="Sick" Type="Self.Sick" Multiplicity="1" />
+    <End Role="MedicalRecord" Type="Self.MedicalRecord" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sick">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MedicalRecord">
+        <PropertyRef Name="IdSick" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuantityMedicine_Medicine">
+    <End Role="Medicine" Type="Self.Medicine" Multiplicity="1" />
+    <End Role="QuantityMedicine" Type="Self.QuantityMedicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medicine">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuantityMedicine">
+        <PropertyRef Name="IdMedicine" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QuantityMedicine_Prescription">
+    <End Role="Prescription" Type="Self.Prescription" Multiplicity="1" />
+    <End Role="QuantityMedicine" Type="Self.QuantityMedicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prescription">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="QuantityMedicine">
+        <PropertyRef Name="IdPrescription" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLBenhVienModelStoreContainer">
+    <EntitySet Name="BHYT" EntityType="Self.BHYT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HospitalFee" EntityType="Self.HospitalFee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MedicalRecord" EntityType="Self.MedicalRecord" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prescription" EntityType="Self.Prescription" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="QuantityMedicine" EntityType="Self.QuantityMedicine" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sick" EntityType="Self.Sick" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BHYT_Patient" Association="Self.FK_BHYT_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="BHYT" EntitySet="BHYT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HospitalFee_MedicalRecord" Association="Self.FK_HospitalFee_MedicalRecord">
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+      <End Role="HospitalFee" EntitySet="HospitalFee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalRecord_Location" Association="Self.FK_MedicalRecord_Location">
+      <End Role="Location" EntitySet="Location" />
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalRecord_Patient" Association="Self.FK_MedicalRecord_Patient">
+      <End Role="Patient" EntitySet="Patient" />
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalRecord_Prescription" Association="Self.FK_MedicalRecord_Prescription">
+      <End Role="Prescription" EntitySet="Prescription" />
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedicalRecord_Sick" Association="Self.FK_MedicalRecord_Sick">
+      <End Role="Sick" EntitySet="Sick" />
+      <End Role="MedicalRecord" EntitySet="MedicalRecord" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuantityMedicine_Medicine" Association="Self.FK_QuantityMedicine_Medicine">
+      <End Role="Medicine" EntitySet="Medicine" />
+      <End Role="QuantityMedicine" EntitySet="QuantityMedicine" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QuantityMedicine_Prescription" Association="Self.FK_QuantityMedicine_Prescription">
+      <End Role="Prescription" EntitySet="Prescription" />
+      <End Role="QuantityMedicine" EntitySet="QuantityMedicine" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,89 @@
+﻿<Window x:Class="QLBenhVien.BillWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLBenhVien"
+        mc:Ignorable="d"
+        
+        xmlns:uc="clr-namespace:QLBenhVien.UserControlD"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        
+        DataContext="{StaticResource BillVM}"
+        Name="window"
+        Title="Hóa đơn" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <!-- binding selected item-->
+            <materialDesign:Card Grid.Row="0" Margin="5">
+                <WrapPanel>
+                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Patient}" SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên bệnh nhân" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Sick}" SelectedItem="{Binding SelectedSick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Loại bệnh" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Prescription}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên đơn thuốc" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Location}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nơi điều trị" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
+                    <DatePicker SelectedDate="{Binding DateIn, StringFormat='dd/MM/yy'}" Width="100" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ngày vào" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                    <DatePicker SelectedDate="{Binding DateOut, StringFormat='dd/MM/yy'}" Width="100" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ngày ra" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                </WrapPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Row="1" Margin="5">
+                <WrapPanel>
+                    <TextBox Text="{Binding Money, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Số tiền đóng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                    <Button Command="{Binding EditCommand}" Content="Đóng tiền" Margin="5" Width="100"></Button>
+                    <Button Command="{Binding DetailBillCommand}" Content="Xem chi tiết hóa đơn" Margin="5" Width="170"></Button>
+                </WrapPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Grid.Row="2" VerticalAlignment="Stretch">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Mã bệnh án" DisplayMemberBinding="{Binding IdMR}"></GridViewColumn>
+                                <GridViewColumn Header="Tên bệnh nhân" DisplayMemberBinding="{Binding PatientName}"></GridViewColumn>
+                                <GridViewColumn Header="Bảo hiểm y tế" DisplayMemberBinding="{Binding CodeBHYT}"></GridViewColumn>
+                                <GridViewColumn Header="Tổng viện phí" DisplayMemberBinding="{Binding TotalFee}"></GridViewColumn>
+                                <GridViewColumn Header="Còn nợ" DisplayMemberBinding="{Binding Owed}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+        
+        
+    </Grid>
+</Window>
