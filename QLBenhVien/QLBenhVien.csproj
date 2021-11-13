@@ -180,6 +180,7 @@
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LoginPatientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\MainPatientViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MedicalRecordViewModel.cs" />
     <Compile Include="ViewModel\MedicineViewModel.cs" />

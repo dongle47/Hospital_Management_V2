@@ -5,8 +5,168 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLBenhVien"
         mc:Ignorable="d"
-        Title="MainWindowPatient" Height="450" Width="800">
-    <Grid>
         
+        xmlns:uc="clr-namespace:QLBenhVien.UserControlD"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        
+        DataContext="{StaticResource MainPatientVM}"
+        Title="Hồ sơ bệnh nhân" Height="450" Width="800">
+
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
+        </Grid>
+
+        <materialDesign:Card Grid.Row="1" Margin="5">
+            <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="2 5 2 5"></Setter>
+                    </Style>
+                </Grid.Resources>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Button Command="{Binding UseCommand}" Grid.Column="0" ToolTip="NDT">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Đơn thuốc" HorizontalAlignment="Center"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon Height="24" Width="24" Kind="NoteText" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </Button>
+
+                <Button Command="{Binding DetailBillCommand}" Grid.Column="3" ToolTip="NDT">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock Text="Hóa đơn" HorizontalAlignment="Center"></TextBlock>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <materialDesign:PackIcon Height="24" Width="24" Kind="AccountCash" HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Grid>
+                </Button>
+
+            </Grid>
+
+        </materialDesign:Card>
+
+
+        <materialDesign:Card Grid.Row="2" Margin="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:Card Grid.Column="0" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBox Name="NamePatient" Text="{Binding NamePatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Tên bệnh nhân" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBox Name="DateBirth" Text="{Binding NamePatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Ngày sinh" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBox Name="AddressPatient" Text="{Binding AddressPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Địa chỉ" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <TextBox Name="PhonePatient" Text="{Binding PhonePatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Số điện thoại" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <TextBox Name="SexPatient" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <TextBox Name="ReligionPatient" Text="{Binding ReligionPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Tôn giáo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+
+                <materialDesign:Card Grid.Column="1" Margin="5">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBox Name="NameSick" Text="{Binding NameSick, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Loại bệnh" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <TextBox Name="NameLocation" Text="{Binding NameSick, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Nơi điều trị" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <TextBox Name="DateIn" Text="{Binding NameSick, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 13" materialDesign:HintAssist.Hint="Ngày vào" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <TextBox Name="DateOut" Text="{Binding NameSick, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 14" materialDesign:HintAssist.Hint="Ngày ra" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                        <WrapPanel Grid.Row="4">
+                            <TextBox Name="CodeBHYT" Text="{Binding CodeBHYT, UpdateSourceTrigger=PropertyChanged}" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Số bảo hiểm" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <DatePicker Name="DateStart" SelectedDate="{Binding DateStart, StringFormat='dd/MM/yy'}" Width="100" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày bắt đầu" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <DatePicker Name="DateEnd" SelectedDate="{Binding DateEnd, StringFormat='dd/MM/yy'}" Width="100" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <!--<TextBox x:Name="redu" Text="{Binding Reduction, UpdateSourceTrigger=PropertyChanged}" Margin="5 12 15 9" materialDesign:HintAssist.Hint="Số phần trăm" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />-->
+                        </WrapPanel>
+                        <!--<Grid Grid.Row="4">
+                            <WrapPanel>
+                                
+                            </WrapPanel>
+                            <TextBox Name="BHYT" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>-->
+                        <Grid Grid.Row="5">
+                            <TextBox Name="Nothing" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 14" materialDesign:HintAssist.Hint="Nothing" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </Grid>
+                    </Grid>
+                </materialDesign:Card>
+            </Grid>
+        </materialDesign:Card>
     </Grid>
 </Window>

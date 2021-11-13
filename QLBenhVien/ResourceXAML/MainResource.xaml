@@ -18,5 +18,6 @@
     <viewmodel:BillViewModel x:Key="BillVM"></viewmodel:BillViewModel>
     <viewmodel:DetailBillViewModel x:Key="DetailBillVM"></viewmodel:DetailBillViewModel>
     <viewmodel:LoginPatientViewModel x:Key="LoginPatientVM"></viewmodel:LoginPatientViewModel>
+    <viewmodel:MainPatientViewModel x:Key="MainPatientVM"></viewmodel:MainPatientViewModel>
 
 </ResourceDictionary>
