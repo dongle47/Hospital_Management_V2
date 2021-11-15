@@ -23,19 +23,21 @@
         
         DataContext="{StaticResource LoginVM}"
         Name="loginWindow"
-        Title="Đăng nhập" Height="300" Width="400">
+        Title="Đăng nhập" Height="290" Width="400">
 
 
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=loginWindow}"></uc:ControlBarUC>
         </Grid>
-        <materialDesign:Card Grid.Row="1" Width="330" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+        
+        <materialDesign:Card Margin="0 7 0 0" Grid.Row="1" Width="330" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid>
                 <Grid.Resources>
                     <Style TargetType="Grid">
@@ -95,13 +97,14 @@
         </materialDesign:Card>
 
         <StackPanel Margin="10" Grid.Row="2">
-
             <Button Command="{Binding RunLoginPatient}"
-                    Width="128"
+                    Width="200"
+                    BorderThickness="0"
+                    BorderBrush="White"
                     Background="White"
                     Foreground="Black"
                     >
-                RUN CODE
+                Tra cứu hồ sơ bệnh án
             </Button>
         </StackPanel>
 

@@ -36,10 +36,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
         </Grid>
+        
         <materialDesign:Card Grid.Row="1">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
@@ -54,6 +57,14 @@
                 </ListView>
             </ScrollViewer>
         </materialDesign:Card>
-        
+
+        <Grid Grid.Row="2" Margin="5">
+            <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="100"
+                    Command="{Binding ExportCommand}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                Export
+            </Button>
+        </Grid>
     </Grid>
 </Window>

@@ -64,23 +64,24 @@ namespace QLBenhVien.ViewModel
 
                     double day = ((DateTime)dateOut - (DateTime)dateIn).TotalDays;
                     decimal totalPriceLoca = (priceLoca * (decimal)day);
-                    decimal totalFee = totalPriceLoca + (decimal)totalPre;
+                    decimal newTotalFee = totalPriceLoca + (decimal)totalPre;
 
                     var hospitalFee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == SelectedItem.IdMR).SingleOrDefault();
+                    
                     if(hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
                     {
-                        hospitalFee.TotalFee = Math.Round(totalFee);
-                        hospitalFee.Owed = Math.Round(totalFee);
+                        hospitalFee.TotalFee = Math.Round(newTotalFee);
+                        hospitalFee.Owed = Math.Round(newTotalFee);
                         DataProvider.Ins.DB.SaveChanges();
                     } 
                     else if(hospitalFee.TotalFee != 0 && hospitalFee.Owed != 0)
                     {
-                        decimal bonus = Math.Round(hospitalFee.TotalFee - totalFee);
+                        decimal bonus = Math.Round(newTotalFee - hospitalFee.TotalFee);
                         if(bonus != 0)
                         {
-                            hospitalFee.TotalFee = Math.Round(totalFee);
-                            decimal fee = Math.Round((decimal)hospitalFee.Owed + bonus);
-                            hospitalFee.Owed = fee;
+                            hospitalFee.TotalFee = Math.Round(newTotalFee);
+                            //decimal fee = Math.Round((decimal)hospitalFee.Owed + bonus);
+                            hospitalFee.Owed += bonus;
                             
                             DataProvider.Ins.DB.SaveChanges();
                         }
@@ -315,7 +316,7 @@ namespace QLBenhVien.ViewModel
                 f.ReductionPercent.Text = reduction;
                 f.ReductionPrice.Text = reduceMoney.ToString();
                 f.TotalHospitalFee.Text = Math.Round(totalFee).ToString();
-                f.FinalFee.Text = (hospitalFee.TotalFee - Math.Round(reduceMoney)).ToString();
+                f.FinalFee.Text = (Math.Round(totalFee) - Math.Round(reduceMoney)).ToString();
 
                 f.ShowDialog();
             }

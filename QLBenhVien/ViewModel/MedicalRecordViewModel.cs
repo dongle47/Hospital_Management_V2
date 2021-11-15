@@ -105,7 +105,6 @@ namespace QLBenhVien.ViewModel
         public ICommand CreateDTCommand { get; set; }
         public MedicalRecordViewModel()
         {
-            
 
             AddCommand = new RelayCommand<MedicalRecord>((p) =>
             {
@@ -126,7 +125,7 @@ namespace QLBenhVien.ViewModel
                     {
                         IdPatient = SelectedPatient.Id,
                         IdSick = SelectedSick.Id,
-                        IdPrescription = 0,
+                        IdPrescription = null,
                         IdLocation = SelectedLocation.Id,
                         DateIn = DateIn,
                         DateOut = DateOut,
