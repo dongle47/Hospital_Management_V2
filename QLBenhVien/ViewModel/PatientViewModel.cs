@@ -58,6 +58,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
 
@@ -67,7 +68,7 @@ namespace QLBenhVien.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(DisplayName))
+                if (string.IsNullOrEmpty(DisplayName) || string.IsNullOrEmpty(Sex))
                 {
                     return false;
                 }
@@ -143,6 +144,35 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.DisplayName = DisplayName;
+            }
+            );
+
+            DeleteCommand = new RelayCommand<MedicalRecord>((p) =>
+            {
+                var check = DataProvider.Ins.DB.MedicalRecords.Where(x => x.IdPatient == SelectedItem.Id);
+                if (check.Count() != 0 || SelectedItem == null)
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) =>
+            {
+                var bhyt = DataProvider.Ins.DB.BHYTs.Where(x => x.IdPatient == SelectedItem.Id).SingleOrDefault();
+                DataProvider.Ins.DB.BHYTs.Remove(bhyt);
+                DataProvider.Ins.DB.SaveChanges();
+
+                var Patient = DataProvider.Ins.DB.Patients.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                DataProvider.Ins.DB.Patients.Remove(Patient);
+                DataProvider.Ins.DB.SaveChanges();
+
+                List.Remove(Patient);
+
+                DisplayName = "";
+                Address = "";
+                Phone = "";
+                Sex = "";
+                Religion = "";
             }
             );
 

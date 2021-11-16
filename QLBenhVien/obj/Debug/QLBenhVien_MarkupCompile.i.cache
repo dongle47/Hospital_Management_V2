@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\App.xaml
-18-1191041911
+17-762646467
 2-1556844510
-56859810689
+54575851678
 25-476125451
-BHYTWindow.xaml;BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;LocationWindow.xaml;LoginPatientWindow.xaml;LoginWindow.xaml;MainWindow.xaml;MainWindowPatient.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;
+BHYTWindow.xaml;BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;LocationWindow.xaml;LoginWindow.xaml;MainWindow.xaml;PrintWindow.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;
 
-False
+True
 

@@ -45,6 +45,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
         public MedicineViewModel()
@@ -105,6 +106,34 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.DisplayName = DisplayName;
+            }
+            );
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (string.IsNullOrEmpty(DisplayName) || SelectedItem == null)
+                {
+                    return false;
+                }
+
+                var check = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdMedicine == SelectedItem.Id);
+
+                if (check.Count() != 0)
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) =>
+            {
+                var Medicine = DataProvider.Ins.DB.Medicines.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+
+                DataProvider.Ins.DB.Medicines.Remove(Medicine);
+                DataProvider.Ins.DB.SaveChanges();
+                List.Remove(Medicine);
+                DisplayName = "";
+                Description = "";
+                Price = 0;
             }
             );
 

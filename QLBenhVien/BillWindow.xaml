@@ -44,7 +44,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
@@ -75,18 +74,7 @@
                 </Grid>
             </materialDesign:Card>
             
-            <materialDesign:Card Grid.Row="1" Margin="5 5 5 0">
-                <WrapPanel>
-                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Patient}" SelectedItem="{Binding SelectedPatient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên bệnh nhân" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Sick}" SelectedItem="{Binding SelectedSick, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Loại bệnh" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Prescription}" SelectedItem="{Binding SelectedPrescription, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Tên đơn thuốc" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <ComboBox Margin="5 5 15 5" DisplayMemberPath="DisplayName" ItemsSource="{Binding Location}" SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nơi điều trị" IsEditable="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"></ComboBox>
-                    <DatePicker SelectedDate="{Binding DateIn, StringFormat='dd/MM/yy'}" Width="100" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ngày vào" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                    <DatePicker SelectedDate="{Binding DateOut, StringFormat='dd/MM/yy'}" Width="100" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ngày ra" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                </WrapPanel>
-            </materialDesign:Card>
-            
-            <materialDesign:Card Grid.Row="2" Margin="5">
+            <materialDesign:Card Grid.Row="1" Margin="5">
                 <WrapPanel>
                     <TextBox Text="{Binding Money, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Số tiền đóng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <Button Command="{Binding EditCommand}" Content="Đóng tiền" Margin="5" Width="100"></Button>
@@ -94,7 +82,7 @@
                 </WrapPanel>
             </materialDesign:Card>
 
-            <materialDesign:Card Grid.Row="3" VerticalAlignment="Stretch">
+            <materialDesign:Card Grid.Row="2" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                         <ListView.View>

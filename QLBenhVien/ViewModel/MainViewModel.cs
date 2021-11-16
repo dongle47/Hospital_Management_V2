@@ -103,7 +103,7 @@ namespace QLBenhVien.ViewModel
             );
 
             PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                MainWindowPatient f = new MainWindowPatient();
+                PrintWindow f = new PrintWindow();
                 f.ShowDialog();
             }
             );

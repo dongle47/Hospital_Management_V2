@@ -23,7 +23,7 @@
         
         DataContext="{StaticResource LoginVM}"
         Name="loginWindow"
-        Title="Đăng nhập" Height="255" Width="345">
+        Title="Đăng nhập" Height="254" Width="345">
 
 
     <Grid>

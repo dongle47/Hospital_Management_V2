@@ -101,11 +101,8 @@
     <Compile Include="LocationWindow.xaml.cs">
       <DependentUpon>LocationWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LoginPatientWindow.xaml.cs">
-      <DependentUpon>LoginPatientWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MainWindowPatient.xaml.cs">
-      <DependentUpon>MainWindowPatient.xaml</DependentUpon>
+    <Compile Include="PrintWindow.xaml.cs">
+      <DependentUpon>PrintWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MedicalRecordWindow.xaml.cs">
       <DependentUpon>MedicalRecordWindow.xaml</DependentUpon>
@@ -189,9 +186,8 @@
     <Compile Include="ViewModel\DetailPrescriptionViewModel.cs" />
     <Compile Include="ViewModel\Global.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
-    <Compile Include="ViewModel\LoginPatientViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
-    <Compile Include="ViewModel\MainPatientViewModel.cs" />
+    <Compile Include="ViewModel\PrintViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MedicalRecordViewModel.cs" />
     <Compile Include="ViewModel\MedicineViewModel.cs" />
@@ -219,10 +215,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LoginPatientWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -242,7 +234,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MainWindowPatient.xaml">
+    <Page Include="PrintWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

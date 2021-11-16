@@ -103,6 +103,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand CreateDTCommand { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -116,8 +117,8 @@ namespace QLBenhVien.ViewModel
                 {
                     return false;
                 }
-
-                //---------------------------------------xử lý điều kiện cho để ko bị trùng
+                
+                
                 return true;
             },
             (p) =>
@@ -206,6 +207,24 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 //SelectedItem.CodeMedicalRecord = CodeMedicalRecord;
+            }
+            );
+
+            DeleteCommand = new RelayCommand<MedicalRecord>((p) =>
+            {
+                return true;
+            },
+            (p) =>
+            {
+                var Fee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == SelectedItem.Id).SingleOrDefault();
+                DataProvider.Ins.DB.HospitalFees.Remove(Fee);
+                DataProvider.Ins.DB.SaveChanges();
+
+                var MR = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                DataProvider.Ins.DB.MedicalRecords.Remove(MR);
+                DataProvider.Ins.DB.SaveChanges();
+
+                List.Remove(MR);
             }
             );
 

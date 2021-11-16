@@ -17,7 +17,6 @@
     <viewmodel:UsePrescriptionViewModel x:Key="UsePrescriptionVM"></viewmodel:UsePrescriptionViewModel>
     <viewmodel:BillViewModel x:Key="BillVM"></viewmodel:BillViewModel>
     <viewmodel:DetailBillViewModel x:Key="DetailBillVM"></viewmodel:DetailBillViewModel>
-    <viewmodel:LoginPatientViewModel x:Key="LoginPatientVM"></viewmodel:LoginPatientViewModel>
-    <viewmodel:MainPatientViewModel x:Key="MainPatientVM"></viewmodel:MainPatientViewModel>
+    <viewmodel:PrintViewModel x:Key="PrinttVM"></viewmodel:PrintViewModel>
 
 </ResourceDictionary>

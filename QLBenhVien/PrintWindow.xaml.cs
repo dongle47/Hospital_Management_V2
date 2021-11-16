@@ -17,9 +17,9 @@ namespace QLBenhVien
     /// <summary>
     /// Interaction logic for MainWindowPatient.xaml
     /// </summary>
-    public partial class MainWindowPatient : Window
+    public partial class PrintWindow : Window
     {
-        public MainWindowPatient()
+        public PrintWindow()
         {
             InitializeComponent();
         }

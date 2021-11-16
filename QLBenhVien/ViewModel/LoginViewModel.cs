@@ -24,7 +24,6 @@ namespace QLBenhVien.ViewModel
         public ICommand LoginCommand { get; set; }
         public ICommand CloseCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
-        public ICommand RunLoginPatient { get; set; }
 
 
         public LoginViewModel()
@@ -48,12 +47,6 @@ namespace QLBenhVien.ViewModel
 
             UserName = "";
             Password = "";
-
-            RunLoginPatient = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                LoginPatientWindow f = new LoginPatientWindow();
-                f.ShowDialog();
-            }
-            );
         }
 
         void Login(Window p)

@@ -1,4 +1,4 @@
-﻿<Window x:Class="QLBenhVien.MainWindowPatient"
+﻿<Window x:Class="QLBenhVien.PrintWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,8 +21,8 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         
-        DataContext="{StaticResource MainPatientVM}"
-        Title="Hồ sơ bệnh nhân" Height="495" Width="800">
+        DataContext="{StaticResource PrinttVM}"
+        Title="Hồ sơ bệnh nhân" Height="521" Width="800">
 
 
     <i:Interaction.Triggers>
@@ -37,6 +37,7 @@
             <RowDefinition Height="45"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
@@ -70,7 +71,7 @@
         </materialDesign:Card>
 
 
-        <materialDesign:Card Grid.Row="2" Margin="5">
+        <materialDesign:Card Grid.Row="2" Margin="5 5 5 0">
             <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
                 <Grid.Resources>
                     <Style TargetType="Button">
@@ -112,9 +113,7 @@
                         </Grid>
                     </Grid>
                 </Button>
-
             </Grid>
-
         </materialDesign:Card>
 
 
@@ -190,12 +189,22 @@
                         </WrapPanel>
                     
                         <Grid Grid.Row="5">
-                            <TextBox Name="Nothing" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 14" materialDesign:HintAssist.Hint="Nothing" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Name="Nothing" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 14" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
                         
                     </Grid>
                 </materialDesign:Card>
             </Grid>
         </materialDesign:Card>
+
+        <Grid Grid.Row="4" Margin="5 5 5 10">
+            <Button Style="{StaticResource MaterialDesignRaisedButton}"
+                    Width="130"
+                    Command="{Binding ExportCommand}"
+                    ToolTip="Resource name: MaterialDesignRaisedButton">
+                Export
+            </Button>
+        </Grid>
+        
     </Grid>
 </Window>

@@ -89,11 +89,9 @@ C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\BillWindow.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\BillWindow.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\DetailBillWindow.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\DetailBillWindow.baml
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\MainWindowPatient.g.cs
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\MainWindowPatient.baml
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\LoginPatientWindow.g.cs
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\LoginPatientWindow.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\UserControlD\TestControl.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\UserControlD\TestControl.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\bin\Debug\DocumentFormat.OpenXml.dll
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\bin\Debug\DocumentFormat.OpenXml.xml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\PrintWindow.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\PrintWindow.baml

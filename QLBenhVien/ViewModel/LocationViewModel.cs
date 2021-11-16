@@ -41,6 +41,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand SearchCommand { get; set; }
 
 
@@ -108,6 +109,34 @@ namespace QLBenhVien.ViewModel
             }
             );
 
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (string.IsNullOrEmpty(DisplayName) || SelectedItem == null)
+                {
+                    return false;
+                }
+
+                var check = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Location.DisplayName == DisplayName);
+
+                if ( check.Count()!=0)
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) =>
+            {
+                var Location = DataProvider.Ins.DB.Locations.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+
+                DataProvider.Ins.DB.Locations.Remove(Location);
+                DataProvider.Ins.DB.SaveChanges();
+                List.Remove(Location);
+                DisplayName = "";
+                Price = 0;
+
+            }
+            );
+
             SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 if (TextSearch == null)
@@ -120,6 +149,7 @@ namespace QLBenhVien.ViewModel
                 }
             }
             );
+
         }
     }
 }

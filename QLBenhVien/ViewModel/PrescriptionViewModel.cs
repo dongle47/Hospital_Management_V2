@@ -42,6 +42,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public ICommand UseCommand { get; set; }
         public ICommand SearchCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
@@ -115,6 +116,31 @@ namespace QLBenhVien.ViewModel
                 f.TotalPricePrescription.Text = SelectedItem.TotalPrice.ToString();
 
                 f.ShowDialog();
+            }
+            );
+
+            DeleteCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                {
+                    return false;
+                }
+                var checkMR = DataProvider.Ins.DB.MedicalRecords.Where(x => x.IdPrescription == SelectedItem.Id);
+                var checkDP = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == SelectedItem.Id);
+                if(checkMR.Count() != 0 || checkDP.Count()!=0)
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) =>
+            {
+                var Prescrip = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+
+                DataProvider.Ins.DB.Prescriptions.Remove(Prescrip);
+                DataProvider.Ins.DB.SaveChanges();
+                List.Remove(Prescrip);
+                DisplayName = "";
             }
             );
 
