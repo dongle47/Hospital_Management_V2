@@ -73,7 +73,16 @@ namespace QLBenhVien.ViewModel
                 {
                     return false;
                 }
-                return true;
+                else
+                {
+                    int iidd = int.Parse(TextSearch);
+                    var check = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == iidd);
+                    if (check.Count() != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
             },
             (p) =>
             {
@@ -94,11 +103,20 @@ namespace QLBenhVien.ViewModel
 
             DetailBillCommand = new RelayCommand<object>((p) =>
             {
-                if(string.IsNullOrEmpty(TextSearch) || TextSearch == "")
+                if (string.IsNullOrEmpty(TextSearch) || TextSearch == "")
                 {
                     return false;
                 }
-                return true;
+                else
+                {
+                    int iidd = int.Parse(TextSearch);
+                    var check = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == iidd);
+                    if (check.Count() != 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
             },
             (p) =>
             {
@@ -228,7 +246,7 @@ namespace QLBenhVien.ViewModel
                 }
                 catch(Exception e) 
                 {
-                    System.Windows.MessageBox.Show("Mã bệnh án không hợp lệ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    System.Windows.MessageBox.Show("Không tồn tại bệnh án hoặc mã bệnh án không hợp lệ", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             );
