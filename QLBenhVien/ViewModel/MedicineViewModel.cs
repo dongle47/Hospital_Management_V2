@@ -34,6 +34,9 @@ namespace QLBenhVien.ViewModel
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private string _Description;
         public string Description { get => _Description; set { _Description = value; OnPropertyChanged(); } }
 
@@ -42,6 +45,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public MedicineViewModel()
         {
@@ -53,7 +57,6 @@ namespace QLBenhVien.ViewModel
                 {
                     return false;
                 }
-
                 var displayList = DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName == DisplayName);
                 if (displayList.Count() == 0)
                 {
@@ -102,6 +105,19 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.DisplayName = DisplayName;
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<Medicine>(DataProvider.Ins.DB.Medicines);
+                }
+                else
+                {
+                    List = new ObservableCollection<Medicine>(DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName.Contains(TextSearch)));
+                }
             }
             );
         }

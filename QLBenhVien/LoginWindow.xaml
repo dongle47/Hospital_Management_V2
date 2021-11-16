@@ -23,7 +23,7 @@
         
         DataContext="{StaticResource LoginVM}"
         Name="loginWindow"
-        Title="Đăng nhập" Height="290" Width="400">
+        Title="Đăng nhập" Height="255" Width="345">
 
 
     <Grid>
@@ -95,18 +95,5 @@
                 </Grid>
             </Grid>
         </materialDesign:Card>
-
-        <StackPanel Margin="10" Grid.Row="2">
-            <Button Command="{Binding RunLoginPatient}"
-                    Width="200"
-                    BorderThickness="0"
-                    BorderBrush="White"
-                    Background="White"
-                    Foreground="Black"
-                    >
-                Tra cứu hồ sơ bệnh án
-            </Button>
-        </StackPanel>
-
     </Grid>
 </Window>

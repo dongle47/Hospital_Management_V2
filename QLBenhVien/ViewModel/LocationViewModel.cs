@@ -33,11 +33,16 @@ namespace QLBenhVien.ViewModel
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private decimal _Price;
         public decimal Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
 
         public LocationViewModel()
         {
@@ -100,6 +105,19 @@ namespace QLBenhVien.ViewModel
                 //LocationList.DisplayName = DisplayName;
 
                 //OnPropertyChanged("List");
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
+                }
+                else
+                {
+                    List = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations.Where(x => x.DisplayName.Contains(TextSearch)));
+                }
             }
             );
         }

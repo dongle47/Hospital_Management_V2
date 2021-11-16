@@ -129,12 +129,9 @@ namespace QLBenhVien.ViewModel
 
             EditCommand = new RelayCommand<QuantityMedicine>((p) =>
             {
-                if (SelectedItem == null)
-                {
-                    return false;
-                }
                 var displayList = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.Id == SelectedItem.Id);
-                if (displayList != null && displayList.Count() != 0)
+                var checkName = DataProvider.Ins.DB.Prescriptions.Where(x => x.DisplayName == DisplayNamePrescription);
+                if ((displayList != null && displayList.Count() != 0) || (checkName != null && checkName.Count()!=0))
                 {
                     return true;
                 }
@@ -142,21 +139,29 @@ namespace QLBenhVien.ViewModel
             },
             (p) =>
             {
-                decimal oldPrice = SelectedItem.Price / SelectedItem.Quantity;
-                var QuantityMedicine = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                var Prescription = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == IdPrescription).SingleOrDefault();
+                if(SelectedItem == null)
+                {
+                    var Prescription = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == IdPrescription).SingleOrDefault();
+                    Prescription.DisplayName = DisplayNamePrescription;
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+                else
+                {
+                    decimal oldPrice = SelectedItem.Price / SelectedItem.Quantity;
+                    var QuantityMedicine = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
+                    var Prescription = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == IdPrescription).SingleOrDefault();
 
-                QuantityMedicine.Price = oldPrice * QuantityInPrescription;
-                QuantityMedicine.Quantity = QuantityInPrescription;
+                    QuantityMedicine.Price = oldPrice * QuantityInPrescription;
+                    QuantityMedicine.Quantity = QuantityInPrescription;
 
 
-                var sumPrice = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription).Sum(x => x.Price);
-                TotalPricePrescription = sumPrice;
+                    var sumPrice = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription).Sum(x => x.Price);
+                    TotalPricePrescription = sumPrice;
 
-                Prescription.TotalPrice = sumPrice;
-                int a = 1;
-                DataProvider.Ins.DB.SaveChanges();
-                
+                    Prescription.DisplayName = DisplayNamePrescription;
+                    Prescription.TotalPrice = sumPrice;
+                    DataProvider.Ins.DB.SaveChanges();
+                }
             }
             );
 

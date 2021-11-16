@@ -23,7 +23,7 @@
         
         DataContext="{StaticResource DetailBillVM}"
         Name="window"
-        Title="Chi tiết hóa đơn" Height="600" Width="800">
+        Title="Chi tiết hóa đơn" Height="580" Width="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

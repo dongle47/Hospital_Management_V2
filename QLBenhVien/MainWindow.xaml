@@ -187,22 +187,21 @@
                         </Grid>
                     </Button>
 
-                    <Button Command="{Binding BillCommand}" Grid.Column="8" ToolTip="NDT">
+                    <Button Command="{Binding PrintCommand}" Grid.Column="8" ToolTip="NDT">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
                                 <RowDefinition></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                                <TextBlock Text="Info" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock Text="In" HorizontalAlignment="Center"></TextBlock>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <materialDesign:PackIcon Height="24" Width="24" Kind="AccountSettingsOutline" HorizontalAlignment="Center"/>
+                                <materialDesign:PackIcon Height="24" Width="24" Kind="FileWord" HorizontalAlignment="Center"/>
                             </Grid>
                         </Grid>
                     </Button>
-
-
+                    
                 </Grid>
             </Grid>
 

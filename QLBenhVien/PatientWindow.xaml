@@ -24,6 +24,13 @@
         DataContext="{StaticResource PatientVM}"
         Name="window"
         Title="Bệnh nhân" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=window}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -32,17 +39,43 @@
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=window}"></uc:ControlBarUC>
         </Grid>
-        
+
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
+            <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{DynamicResource MaterialDesignToolButton}">
+                        <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                    </Button>
+                    <TextBox Grid.Column="1"
+                             Margin="8 0 0 0"
+                             materialDesign:HintAssist.Hint="Build a search bar"
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                             BorderThickness="0"
+                             MinWidth="200"
+                             Text="{Binding TextSearch}"
+                             VerticalAlignment="Center" />
+                    <Button Style="{DynamicResource MaterialDesignToolButton}"
+                            IsDefault="True"
+                            Command="{Binding SearchCommand}"
+                            Grid.Column="2">
+                        <materialDesign:PackIcon Kind="Send" Opacity=".56" Margin="8 0 0 0"/>
+                    </Button>
+                </Grid>
+            </materialDesign:Card>
 
-            <!--Element binding selected item-->
-            <materialDesign:Card Grid.Row="0" Margin="5">
+            <materialDesign:Card Grid.Row="1" Margin="5 5 5 0">
                 <WrapPanel>
                     <TextBox Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Họ và tên" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                     <DatePicker SelectedDate="{Binding DateOfBirth, StringFormat='dd/MM/yy'}" Width="100" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Ngày sinh" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
@@ -60,7 +93,8 @@
                     <TextBox Text="{Binding Religion, UpdateSourceTrigger=PropertyChanged}" Margin="5 5 15 5" materialDesign:HintAssist.Hint="Tôn giáo" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </WrapPanel>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Row="1" Margin="5">
+
+            <materialDesign:Card Grid.Row="2" Margin="5">
                 <WrapPanel>
                     <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
                     <Button Command="{Binding EditCommand}" Content="Sửa" Margin="5" Width="100"></Button>
@@ -68,9 +102,9 @@
                 </WrapPanel>
             </materialDesign:Card>
 
-            <materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
+            <materialDesign:Card Grid.Row="3" Margin="0" VerticalAlignment="Stretch">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                    <ListView Name="listPa" ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Họ và tên" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>

@@ -5,11 +5,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QLBenhVien.ViewModel
 {
-    public class PatientViewModel:BaseViewModel
+    public class PatientViewModel : BaseViewModel
     {
         private ObservableCollection<Patient> _List;
         public ObservableCollection<Patient> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -34,6 +35,9 @@ namespace QLBenhVien.ViewModel
             }
         }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
@@ -54,6 +58,8 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
 
         public PatientViewModel()
         {
@@ -83,8 +89,8 @@ namespace QLBenhVien.ViewModel
                     DateOfBirth = DateOfBirth,
                     Address = Address,
                     Phone = Phone,
-                    Sex=Sex,
-                    Religion=Religion,
+                    Sex = Sex,
+                    Religion = Religion,
                 };
 
                 DataProvider.Ins.DB.Patients.Add(Patient);
@@ -128,7 +134,7 @@ namespace QLBenhVien.ViewModel
             {
                 var Patient = DataProvider.Ins.DB.Patients.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
                 Patient.DisplayName = DisplayName;
-                Patient.DateOfBirth = DateOfBirth; 
+                Patient.DateOfBirth = DateOfBirth;
                 Patient.Address = Address;
                 Patient.Phone = Phone;
                 Patient.Sex = Sex;
@@ -137,6 +143,25 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.DisplayName = DisplayName;
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if(TextSearch == null)
+                {
+                    List = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
+                }
+                else
+                {
+                    List = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients.Where(x => x.DisplayName.Contains(TextSearch)));
+                }
+            }
+            );
+
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                List = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
             }
             );
         }

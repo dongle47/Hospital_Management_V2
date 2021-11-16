@@ -57,6 +57,9 @@ namespace QLBenhVien.ViewModel
         private DateTime? _DateEnd;
         public DateTime? DateEnd { get => _DateEnd; set { _DateEnd = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private string _Reduction;
         public string Reduction 
         { 
@@ -70,6 +73,7 @@ namespace QLBenhVien.ViewModel
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public BHYTViewModel()
         {
@@ -139,6 +143,30 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
 
                 SelectedItem.CodeBHYT = CodeBHYT;
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs);
+                }
+                else
+                {
+                    int n;
+                    bool isNumeric = int.TryParse(TextSearch, out n);
+
+                    if (isNumeric)
+                    {
+                        List = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs.Where(x => x.CodeBHYT.Contains(TextSearch)));
+                    }
+                    else
+                    {
+                        List = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs.Where(x => x.Patient.DisplayName.Contains(TextSearch)));
+                    }
+
+                }
             }
             );
         }

@@ -98,11 +98,15 @@ namespace QLBenhVien.ViewModel
         private DateTime? _DateOut;
         public DateTime? DateOut { get => _DateOut; set { _DateOut = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand CreateDTCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
         public MedicalRecordViewModel()
         {
 
@@ -211,6 +215,23 @@ namespace QLBenhVien.ViewModel
                 Location = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
                 Prescription = new ObservableCollection<Prescription>(DataProvider.Ins.DB.Prescriptions);
                 Patient = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
+
+                var mr = DataProvider.Ins.DB.MedicalRecords.Select(x => x.IdPatient);
+
+                for(int i = 0; i< mr.Count(); i++)
+                {
+                    for (int j=0; j<Patient.Count(); j++)
+                    {
+                        if(Patient[j].Id == mr.ToList()[i])
+                        {
+                            int id = Patient[j].Id;
+                            var removePa = DataProvider.Ins.DB.Patients.Where(z => z.Id == id).SingleOrDefault();
+                            Patient.Remove(removePa);
+                        }
+                    }
+                }
+
+
             }
             );
 
@@ -237,6 +258,20 @@ namespace QLBenhVien.ViewModel
                 
             }
             );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords);
+                }
+                else
+                {
+                    List = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords.Where(x => x.Patient.DisplayName.Contains(TextSearch)));
+                }
+            }
+            );
+
         }
     }
 }

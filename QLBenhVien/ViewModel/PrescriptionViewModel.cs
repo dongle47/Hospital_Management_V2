@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace QLBenhVien.ViewModel
 {
-    class PrescriptionViewModel:BaseViewModel
+    class PrescriptionViewModel : BaseViewModel
     {
         private ObservableCollection<Prescription> _List;
         public ObservableCollection<Prescription> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -34,16 +34,18 @@ namespace QLBenhVien.ViewModel
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private DateTime? _DateCreated;
         public DateTime? DateCreated { get => _DateCreated; set { _DateCreated = value; OnPropertyChanged(); } }
 
-
-
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
-        public ICommand DetailCommand { get; set; }
         public ICommand UseCommand { get; set; }
-        
+        public ICommand SearchCommand { get; set; }
+        public ICommand LoadedWindowCommand { get; set; }
+
         public PrescriptionViewModel()
         {
             List = new ObservableCollection<Prescription>(DataProvider.Ins.DB.Prescriptions);
@@ -70,58 +72,13 @@ namespace QLBenhVien.ViewModel
                 var Prescription = new Prescription()
                 {
                     DisplayName = DisplayName,
-                    DateCreated= DateCreated,
+                    DateCreated = DateCreated,
                 };
 
                 DataProvider.Ins.DB.Prescriptions.Add(Prescription);
                 DataProvider.Ins.DB.SaveChanges();
 
                 List.Add(Prescription);
-            }
-            );
-
-
-            EditCommand = new RelayCommand<object>((p) =>
-            {
-                if (SelectedItem == null)
-                {
-                    return false;
-                }
-                var displayList = DataProvider.Ins.DB.Prescriptions.Where(x => x.DisplayName == DisplayName);
-                if (displayList.Count() != 0)
-                {
-                    return false;
-                }
-                return true;
-            },
-            (p) =>
-            {
-                var Prescription = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                Prescription.DisplayName = DisplayName;
-
-                DataProvider.Ins.DB.SaveChanges();
-
-                SelectedItem.DisplayName = DisplayName;
-            }
-            );
-
-            DetailCommand = new RelayCommand<object>((p) => 
-            {
-                if (SelectedItem == null)
-                {
-                    return false;
-                }
-                return true;
-            }, 
-            (p) => 
-            {
-                Global.setGlobalId(SelectedItem.Id);
-                DetailPrescriptionWindow f = new DetailPrescriptionWindow();
-                f.IdPrescription.Text = SelectedItem.Id.ToString();
-                f.DisplayNamePrescription.Text = SelectedItem.DisplayName.ToString();
-                f.TotalPricePrescription.Text = SelectedItem.TotalPrice.ToString();
-
-                f.ShowDialog();
             }
             );
 
@@ -140,6 +97,47 @@ namespace QLBenhVien.ViewModel
                 f.ShowDialog();
             }
             );
+
+            EditCommand = new RelayCommand<object>((p) =>
+            {
+                if (SelectedItem == null)
+                {
+                    return false;
+                }
+                return true;
+            },
+            (p) =>
+            {
+                Global.setGlobalId(SelectedItem.Id);
+                DetailPrescriptionWindow f = new DetailPrescriptionWindow();
+                f.IdPrescription.Text = SelectedItem.Id.ToString();
+                f.DisplayNamePrescription.Text = SelectedItem.DisplayName.ToString();
+                f.TotalPricePrescription.Text = SelectedItem.TotalPrice.ToString();
+
+                f.ShowDialog();
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<Prescription>(DataProvider.Ins.DB.Prescriptions);
+                }
+                else
+                {
+                    List = new ObservableCollection<Prescription>(DataProvider.Ins.DB.Prescriptions.Where(x => x.DisplayName.Contains(TextSearch)));
+                }
+            }
+            );
+
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                List = new ObservableCollection<Prescription>(DataProvider.Ins.DB.Prescriptions);
+                DateCreated = DateTime.Now;
+            }
+            );
+
         }
     }
 }

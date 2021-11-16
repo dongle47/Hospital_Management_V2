@@ -32,8 +32,13 @@ namespace QLBenhVien.ViewModel
         private string _DisplayName;
         public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
+
 
         public SickViewModel()
         {
@@ -88,6 +93,19 @@ namespace QLBenhVien.ViewModel
                 Sick.DisplayName = DisplayName;
                 DataProvider.Ins.DB.SaveChanges();
                 SelectedItem.DisplayName = DisplayName;
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null)
+                {
+                    List = new ObservableCollection<Sick>(DataProvider.Ins.DB.Sicks);
+                }
+                else
+                {
+                    List = new ObservableCollection<Sick>(DataProvider.Ins.DB.Sicks.Where(x=>x.DisplayName.Contains(TextSearch)));
+                }
             }
             );
         }

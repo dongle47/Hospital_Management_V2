@@ -22,7 +22,8 @@ namespace QLBenhVien.ViewModel
         public ICommand LocationCommand { get; set; }
         public ICommand PrescriptionCommand { get; set; }
         public ICommand BillCommand { get; set; }
-        
+        public ICommand PrintCommand { get; set; }
+
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
@@ -97,6 +98,12 @@ namespace QLBenhVien.ViewModel
 
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 BillWindow f = new BillWindow();
+                f.ShowDialog();
+            }
+            );
+
+            PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                MainWindowPatient f = new MainWindowPatient();
                 f.ShowDialog();
             }
             );

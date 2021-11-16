@@ -83,7 +83,7 @@
                 </Grid>
             </materialDesign:Card>
 
-            <materialDesign:Card Grid.Column="2" Margin="5">
+            <materialDesign:Card Grid.Column="1" Margin="5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
@@ -91,14 +91,17 @@
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
+
+                    <materialDesign:Card Grid.Row="0" Margin="5">
+                        <Grid>
+                            <WrapPanel>
+                                <TextBox Name="IdPrescription" Text="{Binding IdPrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Mã đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                <TextBox Name="DisplayNamePrescription" Text="{Binding DisplayNamePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tên đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                                <TextBox Name="TotalPricePrescription" Text="{Binding TotalPricePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tổng tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            </WrapPanel>
+                        </Grid>
+                    </materialDesign:Card>
                     
-                    <Grid Grid.Row="0">
-                        <WrapPanel>
-                            <TextBox Name="IdPrescription" Text="{Binding IdPrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Mã đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <TextBox Name="DisplayNamePrescription" Text="{Binding DisplayNamePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tên đơn thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <TextBox Name="TotalPricePrescription" Text="{Binding TotalPricePrescription, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tổng tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                        </WrapPanel>
-                    </Grid>
 
                     <materialDesign:Card Grid.Row="1" Margin="5">
                         <WrapPanel>

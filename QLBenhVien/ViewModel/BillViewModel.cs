@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace QLBenhVien.ViewModel
 {
-    class BillViewModel:BaseViewModel
+    class BillViewModel : BaseViewModel
     {
         private ObservableCollection<BillList> _List;
         public ObservableCollection<BillList> List { get => _List; set { _List = value; OnPropertyChanged(); } }
@@ -34,6 +34,9 @@ namespace QLBenhVien.ViewModel
         private string _Money;
         public string Money { get => _Money; set { _Money = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
+
         private BillList _SelectedItem;
         public BillList SelectedItem
         {
@@ -50,39 +53,38 @@ namespace QLBenhVien.ViewModel
                     var priceLoca = DataProvider.Ins.DB.Locations.Where(x => x.Id == idLoca).Select(x => x.Price).SingleOrDefault();
                     var dateOut = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.IdMR).Select(x => x.DateOut).SingleOrDefault();
                     var dateIn = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.IdMR).Select(x => x.DateIn).SingleOrDefault();
-                    
-                    if(dateOut == null)
+
+                    if (dateOut == null)
                     {
                         dateOut = DateTime.Now;
                     }
 
-                    if(idPre == null)
+                    if (idPre == null)
                     {
                         totalPre = 0;
                     }
-
 
                     double day = ((DateTime)dateOut - (DateTime)dateIn).TotalDays;
                     decimal totalPriceLoca = (priceLoca * (decimal)day);
                     decimal newTotalFee = totalPriceLoca + (decimal)totalPre;
 
                     var hospitalFee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == SelectedItem.IdMR).SingleOrDefault();
-                    
-                    if(hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
+
+                    if (hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
                     {
                         hospitalFee.TotalFee = Math.Round(newTotalFee);
                         hospitalFee.Owed = Math.Round(newTotalFee);
                         DataProvider.Ins.DB.SaveChanges();
-                    } 
-                    else if(hospitalFee.TotalFee != 0 && hospitalFee.Owed != 0)
+                    }
+                    else if (hospitalFee.TotalFee != 0 && hospitalFee.Owed != 0)
                     {
                         decimal bonus = Math.Round(newTotalFee - hospitalFee.TotalFee);
-                        if(bonus != 0)
+                        if (bonus != 0)
                         {
                             hospitalFee.TotalFee = Math.Round(newTotalFee);
                             //decimal fee = Math.Round((decimal)hospitalFee.Owed + bonus);
                             hospitalFee.Owed += bonus;
-                            
+
                             DataProvider.Ins.DB.SaveChanges();
                         }
                     }
@@ -94,142 +96,20 @@ namespace QLBenhVien.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand DetailBillCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public BillViewModel()
         {
-            //List = new ObservableCollection<BillList>();
-            //Patient = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
-            //MedicalRecord = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords);
-            //BHYT = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs);
-            //Location = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
 
-            //var List1 = DataProvider.Ins.DB.HospitalFees
-            //    .Join(DataProvider.Ins.DB.MedicalRecords,
-            //          h => h.IdMedicalRecord,
-            //          m => m.Id,
-            //          (h, m) => new
-            //          {
-            //              id = m.Id,
-            //              idPatine = m.IdPatient,
-            //              totalFee = h.TotalFee,
-            //              owed = h.Owed,
-            //          }
-            //          ).Take(100);
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
 
-            //var List2 = List1
-            //.Join(DataProvider.Ins.DB.Patients,
-            //l1 => l1.idPatine,
-            //pa => pa.Id,
-            //(l1, pa) => new
-            //{
-            //    idMR = l1.id,
-            //    idPa = pa.Id,
-            //    namePa = pa.DisplayName,
-            //    totalFee = l1.totalFee,
-            //    owed = l1.owed,
-            //}
-            //).Take(100);
-
-            //var List3 = List2
-            //.Join(DataProvider.Ins.DB.BHYTs,
-            //l2 => l2.idPa,
-            //bh => bh.IdPatient,
-            //(l2, bh) => new
-            //{
-            //    idMR = l2.idMR,
-            //    namePa = l2.namePa,
-            //    codeBh = bh.CodeBHYT,
-            //    totalFee = l2.totalFee,
-            //    owed = l2.owed,
-            //}
-            //).Take(100);
-
-            //foreach (var item in List3)
-            //{
-            //    //idmr, paitenname, code, total, owe
-            //    BillList billList = new BillList();
-            //    billList.IdMR = item.idMR;
-            //    billList.PatientName = item.namePa;
-            //    if (item.codeBh == "0")
-            //    {
-            //        billList.CodeBHYT = "Hết hiệu lực";
-            //    }
-            //    else
-            //    {
-            //        billList.CodeBHYT = "Còn hiệu lực";
-            //    }
-            //    billList.TotalFee = item.totalFee;
-            //    billList.Owed = item.owed;
-
-            //    List.Add(billList);
-            //}
-
-            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
                 List = new ObservableCollection<BillList>();
                 Patient = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
                 MedicalRecord = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords);
                 BHYT = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs);
                 Location = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
 
-                var List1 = DataProvider.Ins.DB.HospitalFees
-                    .Join(DataProvider.Ins.DB.MedicalRecords,
-                          h => h.IdMedicalRecord,
-                          m => m.Id,
-                          (h, m) => new
-                          {
-                              id = m.Id,
-                              idPatine = m.IdPatient,
-                              totalFee = h.TotalFee,
-                              owed = h.Owed,
-                          }
-                          ).Take(100);
-
-                var List2 = List1
-                .Join(DataProvider.Ins.DB.Patients,
-                l1 => l1.idPatine,
-                pa => pa.Id,
-                (l1, pa) => new
-                {
-                    idMR = l1.id,
-                    idPa = pa.Id,
-                    namePa = pa.DisplayName,
-                    totalFee = l1.totalFee,
-                    owed = l1.owed,
-                }
-                ).Take(100);
-
-                var List3 = List2
-                .Join(DataProvider.Ins.DB.BHYTs,
-                l2 => l2.idPa,
-                bh => bh.IdPatient,
-                (l2, bh) => new
-                {
-                    idMR = l2.idMR,
-                    namePa = l2.namePa,
-                    codeBh = bh.CodeBHYT,
-                    totalFee = l2.totalFee,
-                    owed = l2.owed,
-                }
-                ).Take(100);
-
-                foreach (var item in List3)
-                {
-                    //idmr, paitenname, code, total, owe
-                    BillList billList = new BillList();
-                    billList.IdMR = item.idMR;
-                    billList.PatientName = item.namePa;
-                    if (item.codeBh == "0")
-                    {
-                        billList.CodeBHYT = "Hết hiệu lực";
-                    }
-                    else
-                    {
-                        billList.CodeBHYT = "Còn hiệu lực";
-                    }
-                    billList.TotalFee = item.totalFee;
-                    billList.Owed = item.owed;
-
-                    List.Add(billList);
-                }
+                LoadList();
             }
             );
 
@@ -248,17 +128,94 @@ namespace QLBenhVien.ViewModel
                 var idPa = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.IdMR).Select(x => x.IdPatient).SingleOrDefault();
                 var reduction = DataProvider.Ins.DB.BHYTs.Where(x => x.IdPatient == idPa).Select(x => x.Reduction).SingleOrDefault();
 
-                decimal reduceMoney = (Decimal.Parse(reduction) / 100)*hospitalFee.TotalFee;
+                decimal reduceMoney = (Decimal.Parse(reduction) / 100) * hospitalFee.TotalFee;
 
                 hospitalFee.TotalFee -= Math.Round(reduceMoney);
                 hospitalFee.Owed = Math.Round((decimal)hospitalFee.Owed - reduceMoney - Decimal.Parse(Money));
 
-                if(hospitalFee.Owed < 0)
+                if (hospitalFee.Owed < 0)
                 {
                     hospitalFee.Owed = 0;
                 }
 
                 DataProvider.Ins.DB.SaveChanges();
+            }
+            );
+
+            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (TextSearch == null || TextSearch == "")
+                {
+                    LoadList();
+                }
+                else
+                {
+                    var List1 = DataProvider.Ins.DB.HospitalFees
+                    .Join(DataProvider.Ins.DB.MedicalRecords,
+                          h => h.IdMedicalRecord,
+                          m => m.Id,
+                          (h, m) => new
+                          {
+                              id = m.Id,
+                              idPatine = m.IdPatient,
+                              totalFee = h.TotalFee,
+                              owed = h.Owed,
+                          }
+                          ).Take(100);
+
+                    var List2 = List1
+                    .Join(DataProvider.Ins.DB.Patients,
+                    l1 => l1.idPatine,
+                    pa => pa.Id,
+                    (l1, pa) => new
+                    {
+                        idMR = l1.id,
+                        idPa = pa.Id,
+                        namePa = pa.DisplayName,
+                        totalFee = l1.totalFee,
+                        owed = l1.owed,
+                    }
+                    ).Take(100);
+
+                    var List3 = List2
+                    .Join(DataProvider.Ins.DB.BHYTs,
+                    l2 => l2.idPa,
+                    bh => bh.IdPatient,
+                    (l2, bh) => new
+                    {
+                        idMR = l2.idMR,
+                        namePa = l2.namePa,
+                        codeBh = bh.CodeBHYT,
+                        totalFee = l2.totalFee,
+                        owed = l2.owed,
+                    }
+                    ).Take(100);
+
+                    List.Clear();
+
+                    foreach (var item in List3)
+                    {
+                        //idmr, paitenname, code, total, owe
+                        BillList billList = new BillList();
+                        billList.IdMR = item.idMR;
+                        billList.PatientName = item.namePa;
+                        if (item.codeBh == "0")
+                        {
+                            billList.CodeBHYT = "Hết hiệu lực";
+                        }
+                        else
+                        {
+                            billList.CodeBHYT = "Còn hiệu lực";
+                        }
+                        billList.TotalFee = item.totalFee;
+                        billList.Owed = item.owed;
+
+                        if (billList.IdMR == int.Parse(TextSearch))
+                        {
+                            List.Add(billList);
+                        }
+                    }
+                }
             }
             );
 
@@ -311,7 +268,7 @@ namespace QLBenhVien.ViewModel
                 DetailBillWindow f = new DetailBillWindow();
                 f.TotalPricePrescription.Text = totalPrescription.ToString();
                 f.TotalDayLocation.Text = Math.Round(TotalDay).ToString();
-                f.TotalPriceLocation.Text = Math.Round(totalPriceLocation) .ToString();
+                f.TotalPriceLocation.Text = Math.Round(totalPriceLocation).ToString();
                 f.NameLocation.Text = NameLocation;
                 f.ReductionPercent.Text = reduction;
                 f.ReductionPrice.Text = reduceMoney.ToString();
@@ -323,167 +280,301 @@ namespace QLBenhVien.ViewModel
             );
 
 
-
-
-            //LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-            //    var L1 = DataProvider.Ins.DB.MedicalRecords.DefaultIfEmpty()
-            //    .Join(DataProvider.Ins.DB.Locations.DefaultIfEmpty(),
-            //          l1 => l1.IdLocation,
-            //          l => l.Id,
-            //          (l1, l) => new
-            //          {
-            //              IdMR = l1.Id,
-            //              IdPre = l1.IdPrescription,
-            //              LocationPrice = l.Price,
-            //              DateIn = l1.DateIn,
-            //              DateOut = l1.DateOut,
-            //          }
-            //          ).Take(100);
-
-            //    var L2 = L1.DefaultIfEmpty()
-            //    .Join(DataProvider.Ins.DB.Prescriptions.DefaultIfEmpty(),
-            //          l1 => l1.IdPre,
-            //          pr => pr.Id,
-            //          (l1, pr) => new
-            //          {
-            //              IdMR = l1.IdMR,
-            //              PrePrice = pr.TotalPrice,
-            //              LocationPrice = l1.LocationPrice,
-            //              DateIn = l1.DateIn,
-            //              DateOut = l1.DateOut,
-            //          }
-            //          ).Take(100);
-
-                
-
-            //    foreach (var item in L2)
-            //    {
-            //        var hospitalFee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == item.IdMR).SingleOrDefault();
-
-            //        if (hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
-            //        {
-            //            DateTime newDateOut = new DateTime();
-            //            decimal newPrePrice = 0;
-            //            if (item.DateOut == null)
-            //            {
-            //                newDateOut = DateTime.Now;
-            //            }
-            //            else
-            //            {
-            //                newDateOut = (DateTime)item.DateOut;
-            //            }
-            //            if (item.PrePrice != null)
-            //            {
-            //                newPrePrice = (decimal)item.PrePrice;
-            //            }
-            //            double day = (newDateOut - (DateTime)item.DateIn).TotalDays;
-            //            decimal totalLocationPrice = item.LocationPrice * (decimal)day;
-            //            decimal TotalFee = totalLocationPrice + newPrePrice;
-
-            //            hospitalFee.TotalFee = TotalFee;
-            //            hospitalFee.Owed = TotalFee;
-            //            DataProvider.Ins.DB.SaveChanges();
-
-            //        }
-            //    }
-            //}
-            //);
-
-
-
-
-            //var List1 = DataProvider.Ins.DB.HospitalFees
-            //.Join(DataProvider.Ins.DB.MedicalRecords,
-            //      h => h.IdMedicalRecord,
-            //      m => m.Id,
-            //      (h, m) => new
-            //      {
-            //          id = m.Id,
-            //          idPatine = m.IdPatient,
-            //          totalFee = h.TotalFee,
-            //          owed = h.Owed,
-            //      }
-            //      ).Take(100);
-
-            //var List2 = List1
-            //.Join(DataProvider.Ins.DB.Patients,
-            //l1 => l1.idPatine,
-            //pa => pa.Id,
-            //(l1, pa) => new
-            //{
-            //    idMR = l1.id,
-            //    idPa = pa.Id,
-            //    namePa = pa.DisplayName,
-            //    totalFee = l1.totalFee,
-            //    owed = l1.owed,
-            //}
-            //).Take(100);
-
-            //var List3 = List2
-            //.Join(DataProvider.Ins.DB.BHYTs,
-            //l2 => l2.idPa,
-            //bh => bh.IdPatient,
-            //(l2, bh) => new
-            //{
-            //    idMR = l2.idMR,
-            //    namePa = l2.namePa,
-            //    codeBh = bh.CodeBHYT,
-            //    totalFee = l2.totalFee,
-            //    owed = l2.owed,
-            //}
-            //).Take(100);
-
-            //foreach (var item in List3)
-            //{
-            //    BillList billList = new BillList();
-            //    billList.IdMR = item.idMR;
-            //    billList.PatientName = item.namePa;
-            //    billList.CodeBHYT = item.codeBh;
-            //    billList.TotalFee = item.totalFee;
-            //    billList.Owed = item.owed;
-
-            //    List.Remove(billList);
-            //}
-            //foreach (var item in List3)
-            //{
-            //    //idmr, paitenname, code, total, owe
-            //    BillList billList = new BillList();
-            //    billList.IdMR = item.idMR;
-            //    billList.PatientName = item.namePa;
-            //    if (item.codeBh == "0")
-            //    {
-            //        billList.CodeBHYT = "Hết hiệu lực";
-            //    }
-            //    else
-            //    {
-            //        billList.CodeBHYT = "Còn hiệu lực";
-            //    }
-            //    billList.TotalFee = item.totalFee;
-            //    billList.Owed = item.owed;
-
-            //    List.Add(billList);
-            //}
-
-
-
-            //CreateDTCommand = new RelayCommand<Window>((p) =>
-            //{
-            //    if (SelectedPrescription == null)
-            //    {
-            //        return true;
-            //    }
-            //    return false;
-
-            //},
-            //(p) =>
-            //{
-            //    Global.setGlobalText(SelectedPatient.DisplayName);
-            //    PrescriptionWindow f = new PrescriptionWindow();
-            //    f.displayName.Text = "ĐT của " + Global.globalText;
-            //    f.ShowDialog();
-
-            //}
-            //);
         }
+
+        public void LoadList()
+        {
+            var List1 = DataProvider.Ins.DB.HospitalFees
+                    .Join(DataProvider.Ins.DB.MedicalRecords,
+                          h => h.IdMedicalRecord,
+                          m => m.Id,
+                          (h, m) => new
+                          {
+                              id = m.Id,
+                              idPatine = m.IdPatient,
+                              totalFee = h.TotalFee,
+                              owed = h.Owed,
+                          }
+                          ).Take(100);
+
+            var List2 = List1
+            .Join(DataProvider.Ins.DB.Patients,
+            l1 => l1.idPatine,
+            pa => pa.Id,
+            (l1, pa) => new
+            {
+                idMR = l1.id,
+                idPa = pa.Id,
+                namePa = pa.DisplayName,
+                totalFee = l1.totalFee,
+                owed = l1.owed,
+            }
+            ).Take(100);
+
+            var List3 = List2
+            .Join(DataProvider.Ins.DB.BHYTs,
+            l2 => l2.idPa,
+            bh => bh.IdPatient,
+            (l2, bh) => new
+            {
+                idMR = l2.idMR,
+                namePa = l2.namePa,
+                codeBh = bh.CodeBHYT,
+                totalFee = l2.totalFee,
+                owed = l2.owed,
+            }
+            ).Take(100);
+
+            List.Clear();
+
+            foreach (var item in List3)
+            {
+                //idmr, paitenname, code, total, owe
+                BillList billList = new BillList();
+                billList.IdMR = item.idMR;
+                billList.PatientName = item.namePa;
+                if (item.codeBh == "0")
+                {
+                    billList.CodeBHYT = "Hết hiệu lực";
+                }
+                else
+                {
+                    billList.CodeBHYT = "Còn hiệu lực";
+                }
+                billList.TotalFee = item.totalFee;
+                billList.Owed = item.owed;
+
+                List.Add(billList);
+            }
+        }
+
     }
 }
+
+
+//List = new ObservableCollection<BillList>();
+//Patient = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
+//MedicalRecord = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords);
+//BHYT = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs);
+//Location = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
+
+//var List1 = DataProvider.Ins.DB.HospitalFees
+//    .Join(DataProvider.Ins.DB.MedicalRecords,
+//          h => h.IdMedicalRecord,
+//          m => m.Id,
+//          (h, m) => new
+//          {
+//              id = m.Id,
+//              idPatine = m.IdPatient,
+//              totalFee = h.TotalFee,
+//              owed = h.Owed,
+//          }
+//          ).Take(100);
+
+//var List2 = List1
+//.Join(DataProvider.Ins.DB.Patients,
+//l1 => l1.idPatine,
+//pa => pa.Id,
+//(l1, pa) => new
+//{
+//    idMR = l1.id,
+//    idPa = pa.Id,
+//    namePa = pa.DisplayName,
+//    totalFee = l1.totalFee,
+//    owed = l1.owed,
+//}
+//).Take(100);
+
+//var List3 = List2
+//.Join(DataProvider.Ins.DB.BHYTs,
+//l2 => l2.idPa,
+//bh => bh.IdPatient,
+//(l2, bh) => new
+//{
+//    idMR = l2.idMR,
+//    namePa = l2.namePa,
+//    codeBh = bh.CodeBHYT,
+//    totalFee = l2.totalFee,
+//    owed = l2.owed,
+//}
+//).Take(100);
+
+//foreach (var item in List3)
+//{
+//    //idmr, paitenname, code, total, owe
+//    BillList billList = new BillList();
+//    billList.IdMR = item.idMR;
+//    billList.PatientName = item.namePa;
+//    if (item.codeBh == "0")
+//    {
+//        billList.CodeBHYT = "Hết hiệu lực";
+//    }
+//    else
+//    {
+//        billList.CodeBHYT = "Còn hiệu lực";
+//    }
+//    billList.TotalFee = item.totalFee;
+//    billList.Owed = item.owed;
+
+//    List.Add(billList);
+//}
+
+//LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+//    var L1 = DataProvider.Ins.DB.MedicalRecords.DefaultIfEmpty()
+//    .Join(DataProvider.Ins.DB.Locations.DefaultIfEmpty(),
+//          l1 => l1.IdLocation,
+//          l => l.Id,
+//          (l1, l) => new
+//          {
+//              IdMR = l1.Id,
+//              IdPre = l1.IdPrescription,
+//              LocationPrice = l.Price,
+//              DateIn = l1.DateIn,
+//              DateOut = l1.DateOut,
+//          }
+//          ).Take(100);
+
+//    var L2 = L1.DefaultIfEmpty()
+//    .Join(DataProvider.Ins.DB.Prescriptions.DefaultIfEmpty(),
+//          l1 => l1.IdPre,
+//          pr => pr.Id,
+//          (l1, pr) => new
+//          {
+//              IdMR = l1.IdMR,
+//              PrePrice = pr.TotalPrice,
+//              LocationPrice = l1.LocationPrice,
+//              DateIn = l1.DateIn,
+//              DateOut = l1.DateOut,
+//          }
+//          ).Take(100);
+
+
+
+//    foreach (var item in L2)
+//    {
+//        var hospitalFee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == item.IdMR).SingleOrDefault();
+
+//        if (hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
+//        {
+//            DateTime newDateOut = new DateTime();
+//            decimal newPrePrice = 0;
+//            if (item.DateOut == null)
+//            {
+//                newDateOut = DateTime.Now;
+//            }
+//            else
+//            {
+//                newDateOut = (DateTime)item.DateOut;
+//            }
+//            if (item.PrePrice != null)
+//            {
+//                newPrePrice = (decimal)item.PrePrice;
+//            }
+//            double day = (newDateOut - (DateTime)item.DateIn).TotalDays;
+//            decimal totalLocationPrice = item.LocationPrice * (decimal)day;
+//            decimal TotalFee = totalLocationPrice + newPrePrice;
+
+//            hospitalFee.TotalFee = TotalFee;
+//            hospitalFee.Owed = TotalFee;
+//            DataProvider.Ins.DB.SaveChanges();
+
+//        }
+//    }
+//}
+//);
+
+
+
+
+//var List1 = DataProvider.Ins.DB.HospitalFees
+//.Join(DataProvider.Ins.DB.MedicalRecords,
+//      h => h.IdMedicalRecord,
+//      m => m.Id,
+//      (h, m) => new
+//      {
+//          id = m.Id,
+//          idPatine = m.IdPatient,
+//          totalFee = h.TotalFee,
+//          owed = h.Owed,
+//      }
+//      ).Take(100);
+
+//var List2 = List1
+//.Join(DataProvider.Ins.DB.Patients,
+//l1 => l1.idPatine,
+//pa => pa.Id,
+//(l1, pa) => new
+//{
+//    idMR = l1.id,
+//    idPa = pa.Id,
+//    namePa = pa.DisplayName,
+//    totalFee = l1.totalFee,
+//    owed = l1.owed,
+//}
+//).Take(100);
+
+//var List3 = List2
+//.Join(DataProvider.Ins.DB.BHYTs,
+//l2 => l2.idPa,
+//bh => bh.IdPatient,
+//(l2, bh) => new
+//{
+//    idMR = l2.idMR,
+//    namePa = l2.namePa,
+//    codeBh = bh.CodeBHYT,
+//    totalFee = l2.totalFee,
+//    owed = l2.owed,
+//}
+//).Take(100);
+
+//foreach (var item in List3)
+//{
+//    BillList billList = new BillList();
+//    billList.IdMR = item.idMR;
+//    billList.PatientName = item.namePa;
+//    billList.CodeBHYT = item.codeBh;
+//    billList.TotalFee = item.totalFee;
+//    billList.Owed = item.owed;
+
+//    List.Remove(billList);
+//}
+//foreach (var item in List3)
+//{
+//    //idmr, paitenname, code, total, owe
+//    BillList billList = new BillList();
+//    billList.IdMR = item.idMR;
+//    billList.PatientName = item.namePa;
+//    if (item.codeBh == "0")
+//    {
+//        billList.CodeBHYT = "Hết hiệu lực";
+//    }
+//    else
+//    {
+//        billList.CodeBHYT = "Còn hiệu lực";
+//    }
+//    billList.TotalFee = item.totalFee;
+//    billList.Owed = item.owed;
+
+//    List.Add(billList);
+//}
+
+
+
+//CreateDTCommand = new RelayCommand<Window>((p) =>
+//{
+//    if (SelectedPrescription == null)
+//    {
+//        return true;
+//    }
+//    return false;
+
+//},
+//(p) =>
+//{
+//    Global.setGlobalText(SelectedPatient.DisplayName);
+//    PrescriptionWindow f = new PrescriptionWindow();
+//    f.displayName.Text = "ĐT của " + Global.globalText;
+//    f.ShowDialog();
+
+//}
+//);
