@@ -23,5 +23,10 @@ namespace QLBenhVien
         {
             InitializeComponent();
         }
+
+        private void listPa_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

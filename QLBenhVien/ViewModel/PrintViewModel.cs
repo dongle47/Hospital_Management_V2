@@ -236,6 +236,8 @@ namespace QLBenhVien.ViewModel
                     if (codeBHYT == "0")
                     {
                         CodeBHYT = "Chưa có";
+                        DateStart = "";
+                        DateEnd = "";
                     }
                     else
                     {
