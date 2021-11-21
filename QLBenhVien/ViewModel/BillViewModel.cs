@@ -102,13 +102,11 @@ namespace QLBenhVien.ViewModel
 
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
                 List = new ObservableCollection<BillList>();
                 Patient = new ObservableCollection<Patient>(DataProvider.Ins.DB.Patients);
                 MedicalRecord = new ObservableCollection<MedicalRecord>(DataProvider.Ins.DB.MedicalRecords);
                 BHYT = new ObservableCollection<BHYT>(DataProvider.Ins.DB.BHYTs);
                 Location = new ObservableCollection<Location>(DataProvider.Ins.DB.Locations);
-
                 LoadList();
             }
             );
@@ -221,6 +219,10 @@ namespace QLBenhVien.ViewModel
 
             DetailBillCommand = new RelayCommand<object>((p) =>
             {
+                if(SelectedItem == null)
+                {
+                    return false;
+                }
                 return true;
             },
             (p) =>
@@ -346,6 +348,66 @@ namespace QLBenhVien.ViewModel
 
                 List.Add(billList);
             }
+
+
+            var L1 = DataProvider.Ins.DB.MedicalRecords.DefaultIfEmpty()
+            .Join(DataProvider.Ins.DB.Locations.DefaultIfEmpty(),
+                  l1 => l1.IdLocation,
+                  l => l.Id,
+                  (l1, l) => new
+                  {
+                      IdMR = l1.Id,
+                      IdPre = l1.IdPrescription,
+                      LocationPrice = l.Price,
+                      DateIn = l1.DateIn,
+                      DateOut = l1.DateOut,
+                  }
+                  ).Take(100);
+
+            var L2 = L1.DefaultIfEmpty()
+            .Join(DataProvider.Ins.DB.Prescriptions.DefaultIfEmpty(),
+                  l1 => l1.IdPre,
+                  pr => pr.Id,
+                  (l1, pr) => new
+                  {
+                      IdMR = l1.IdMR,
+                      PrePrice = pr.TotalPrice,
+                      LocationPrice = l1.LocationPrice,
+                      DateIn = l1.DateIn,
+                      DateOut = l1.DateOut,
+                  }
+                  ).Take(100);
+
+            foreach (var item in L2)
+            {
+                var hospitalFee = DataProvider.Ins.DB.HospitalFees.Where(x => x.IdMedicalRecord == item.IdMR).SingleOrDefault();
+
+                if (hospitalFee.TotalFee == 0 && hospitalFee.Owed == 0)
+                {
+                    DateTime newDateOut = new DateTime();
+                    decimal newPrePrice = 0;
+                    if (item.DateOut == null)
+                    {
+                        newDateOut = DateTime.Now;
+                    }
+                    else
+                    {
+                        newDateOut = (DateTime)item.DateOut;
+                    }
+                    if (item.PrePrice != null)
+                    {
+                        newPrePrice = (decimal)item.PrePrice;
+                    }
+                    double day = (newDateOut - (DateTime)item.DateIn).TotalDays;
+                    decimal totalLocationPrice = item.LocationPrice * (decimal)day;
+                    decimal TotalFee = totalLocationPrice + newPrePrice;
+
+                    hospitalFee.TotalFee = TotalFee;
+                    hospitalFee.Owed = TotalFee;
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+            }
+
         }
 
     }

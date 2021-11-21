@@ -37,7 +37,8 @@ namespace QLBenhVien.ViewModel
                 OnPropertyChanged();
                 if (SelectedItem != null)
                 {
-                    SelectedPatient = SelectedItem.Patient;
+                    //SelectedPatient = SelectedItem.Patient;
+                    IdPatient = SelectedItem.Patient.Id;
                     SelectedSick = SelectedItem.Sick;
                     SelectedPrescription = SelectedItem.Prescription;
                     SelectedLocation = SelectedItem.Location;
@@ -91,6 +92,8 @@ namespace QLBenhVien.ViewModel
             }
         }
 
+        private int _IdPatient;
+        public int IdPatient { get => _IdPatient; set { _IdPatient = value; OnPropertyChanged(); } }
 
         private DateTime? _DateIn;
         public DateTime? DateIn { get => _DateIn; set { _DateIn = value; OnPropertyChanged(); } }
@@ -117,7 +120,6 @@ namespace QLBenhVien.ViewModel
                 {
                     return false;
                 }
-                
                 
                 return true;
             },
@@ -175,32 +177,44 @@ namespace QLBenhVien.ViewModel
                     return false;
                 }
                 var getMedicalRecord = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.Id ).SingleOrDefault();
-                if(SelectedItem.DateOut == null || SelectedItem.DateOut != DateOut)
+                if(getMedicalRecord.IdLocation != SelectedLocation.Id)
                 {
-                    if (DateOut != null)
-                        return true;
+                    return true;
                 }
-              
-                if(getMedicalRecord.IdPrescription == null)
+                if(getMedicalRecord.IdPrescription != null && SelectedPrescription != null)
                 {
-                    if(SelectedPrescription != null)
-                        return true;
-                }
-                else
-                {
-                    if (getMedicalRecord.IdSick != SelectedSick.Id)
+                    if (getMedicalRecord.IdPrescription != SelectedPrescription.Id )
                     {
                         return true;
                     }
+                }
+                else if(getMedicalRecord.IdPrescription == null)
+                {
+                    if (SelectedPrescription != null)
+                    {
+                        return true;
+                    }
+                }
+
+                if(getMedicalRecord.IdSick != SelectedSick.Id)
+                {
+                    return true;
+                }
+                if(getMedicalRecord.DateOut == null && DateOut != null)
+                {
+                    return true;
                 }
                 return false;
             },
             (p) =>
             {
                 var MedicalRecord = DataProvider.Ins.DB.MedicalRecords.Where(x => x.Id == SelectedItem.Id).SingleOrDefault();
-                MedicalRecord.IdPatient = SelectedPatient.Id;
+                MedicalRecord.IdPatient = IdPatient;
                 MedicalRecord.IdSick = SelectedSick.Id;
-                MedicalRecord.IdPrescription = SelectedPrescription.Id;
+                if(SelectedPrescription != null)
+                {
+                    MedicalRecord.IdPrescription = SelectedPrescription.Id;
+                }
                 MedicalRecord.IdLocation = SelectedLocation.Id;
                 MedicalRecord.DateIn = DateIn;
                 MedicalRecord.DateOut = DateOut;
@@ -212,6 +226,10 @@ namespace QLBenhVien.ViewModel
 
             DeleteCommand = new RelayCommand<MedicalRecord>((p) =>
             {
+                if(SelectedItem == null)
+                {
+                    return false;
+                }
                 return true;
             },
             (p) =>
