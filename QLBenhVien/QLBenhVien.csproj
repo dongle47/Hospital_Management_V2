@@ -86,9 +86,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BHYTWindow.xaml.cs">
-      <DependentUpon>BHYTWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="BillWindow.xaml.cs">
       <DependentUpon>BillWindow.xaml</DependentUpon>
     </Compile>
@@ -97,9 +94,6 @@
     </Compile>
     <Compile Include="DetailPrescriptionWindow.xaml.cs">
       <DependentUpon>DetailPrescriptionWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="LocationWindow.xaml.cs">
-      <DependentUpon>LocationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="PrintWindow.xaml.cs">
       <DependentUpon>PrintWindow.xaml</DependentUpon>
@@ -195,23 +189,42 @@
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />
     <Compile Include="ViewModel\SickViewModel.cs" />
     <Compile Include="ViewModel\UsePrescriptionViewModel.cs" />
-    <Page Include="BHYTWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="Views\BHYTView.xaml.cs">
+      <DependentUpon>BHYTView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BillView.xaml.cs">
+      <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LocationView.xaml.cs">
+      <DependentUpon>LocationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MedicalRecordView.xaml.cs">
+      <DependentUpon>MedicalRecordView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MedicineView.xaml.cs">
+      <DependentUpon>MedicineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientView.xaml.cs">
+      <DependentUpon>PatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrescriptionView.xaml.cs">
+      <DependentUpon>PrescriptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrintView.xaml.cs">
+      <DependentUpon>PrintView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SickView.xaml.cs">
+      <DependentUpon>SickView.xaml</DependentUpon>
+    </Compile>
     <Page Include="BillWindow.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="DetailBillWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailPrescriptionWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -271,6 +284,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControlD\TestControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BHYTView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LocationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MedicalRecordView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MedicineView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PatientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrescriptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrintView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SickView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

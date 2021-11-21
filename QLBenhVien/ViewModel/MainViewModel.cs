@@ -14,12 +14,7 @@ namespace QLBenhVien.ViewModel
     {
         public bool IsLoaded = false;
         public ICommand LoadedWindowCommand { get; set; }
-        public ICommand PatientCommand { get; set; }
         public ICommand MedicalRecordCommand { get; set; }
-        public ICommand BHYTCommand { get; set; }
-        public ICommand SickCommand { get; set; }
-        public ICommand MedicineCommand { get; set; }
-        public ICommand LocationCommand { get; set; }
         public ICommand PrescriptionCommand { get; set; }
         public ICommand BillCommand { get; set; }
         public ICommand PrintCommand { get; set; }
@@ -54,57 +49,30 @@ namespace QLBenhVien.ViewModel
             }
             );
 
-            PatientCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                PatientWindow f = new PatientWindow();
-                f.ShowDialog();
-            }
-            );
-
-            LocationCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                LocationWindow f = new LocationWindow();
-                f.ShowDialog();
-            }
-            );
-
-            MedicineCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                MedicineWindow f = new MedicineWindow();
-                f.ShowDialog();
-            }
-            );
-
-            SickCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                SickWindow f = new SickWindow();
-                f.ShowDialog();
-            }
-            );
-
             MedicalRecordCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 MedicalRecordWindow f = new MedicalRecordWindow();
-                f.ShowDialog();
-            }
-            );
-
-            BHYTCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                BHYTWindow f = new BHYTWindow();
-                f.ShowDialog();
+                f.Show();
+                f.Close();
             }
             );
 
             PrescriptionCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 PrescriptionWindow f = new PrescriptionWindow();
-                f.ShowDialog();
+                f.Show();
+                f.Close();
             }
             );
 
             BillCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 BillWindow f = new BillWindow();
-                f.ShowDialog();
+                f.Show();
+                f.Close();
             }
             );
 
             PrintCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                PrintWindow f = new PrintWindow();
-                f.ShowDialog();
+                //PrintWindow f = new PrintWindow();
+                //f.ShowDialog();
             }
             );
         }

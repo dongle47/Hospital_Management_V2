@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLBenhVien
+namespace QLBenhVien.Views
 {
     /// <summary>
-    /// Interaction logic for LocationWindow.xaml
+    /// Interaction logic for PrintView.xaml
     /// </summary>
-    public partial class LocationWindow : Window
+    public partial class PrintView : UserControl
     {
-        public LocationWindow()
+        public PrintView()
         {
             InitializeComponent();
         }

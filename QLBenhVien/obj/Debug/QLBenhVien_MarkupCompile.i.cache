@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\obj\Debug\
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\
 QLBenhVien
 none
 false
 DEBUG;TRACE
-C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien\QLBenhVien\App.xaml
-17-762646467
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\App.xaml
+24-1256444587
 2-1556844510
-54575851678
-25-476125451
-BHYTWindow.xaml;BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;LocationWindow.xaml;LoginWindow.xaml;MainWindow.xaml;PrintWindow.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;
+61-1610023607
+25-1678404173
+BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;LoginWindow.xaml;MainWindow.xaml;PrintWindow.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;Views\BHYTView.xaml;Views\BillView.xaml;Views\LocationView.xaml;Views\MedicalRecordView.xaml;Views\MedicineView.xaml;Views\PatientView.xaml;Views\PrescriptionView.xaml;Views\PrintView.xaml;Views\SickView.xaml;
 
 True
 

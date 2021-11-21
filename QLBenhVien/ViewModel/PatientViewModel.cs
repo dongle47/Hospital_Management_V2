@@ -150,7 +150,7 @@ namespace QLBenhVien.ViewModel
             DeleteCommand = new RelayCommand<MedicalRecord>((p) =>
             {
                 var check = DataProvider.Ins.DB.MedicalRecords.Where(x => x.IdPatient == SelectedItem.Id);
-                if (check.Count() != 0 || SelectedItem == null)
+                if (check.Count() != 0 || SelectedItem == null || DisplayName == null)
                 {
                     return false;
                 }

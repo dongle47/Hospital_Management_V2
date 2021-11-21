@@ -272,9 +272,11 @@ namespace QLBenhVien.ViewModel
                     f.displayName.Text = "ĐT của " + Global.globalText;
                     f.ShowDialog();
                 }
-                PrescriptionWindow m = new PrescriptionWindow();
-                m.ShowDialog();
-                
+                else
+                {
+                    PrescriptionWindow m = new PrescriptionWindow();
+                    m.ShowDialog();
+                }
             }
             );
 

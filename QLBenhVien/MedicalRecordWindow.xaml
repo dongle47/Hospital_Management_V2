@@ -23,7 +23,7 @@
         
         DataContext="{StaticResource MedicalRecordVM}"
         Name="window"
-        Title="Bệnh án" Height="450" Width="900">
+        Title="Bệnh án" Height="450" Width="800">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">

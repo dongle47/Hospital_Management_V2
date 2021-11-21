@@ -92,7 +92,7 @@ namespace QLBenhVien.ViewModel
             AddCommand = new RelayCommand<QuantityMedicine>((p) =>
             {
                 var checkSameMedicine = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription && x.IdMedicine == SelectedMedicine.Id);
-                if (SelectedMedicine == null || checkSameMedicine.Count() > 0)
+                if (SelectedMedicine == null || checkSameMedicine.Count() > 0 || Quantity == 0 )
                 {
                     return false;
                 }
@@ -185,8 +185,16 @@ namespace QLBenhVien.ViewModel
                 DataProvider.Ins.DB.QuantityMedicines.Remove(QuantityMedicine);
                 DataProvider.Ins.DB.SaveChanges();
 
-                var sumPrice = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription).Sum(x => x.Price);
-                TotalPricePrescription = sumPrice;
+                try
+                {
+                    var sumPrice = DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription).Sum(x => x.Price);
+                    TotalPricePrescription = sumPrice;
+                }
+                catch
+                {
+                    TotalPricePrescription = 0;
+                }
+                
 
                 List.Remove(QuantityMedicine);
 

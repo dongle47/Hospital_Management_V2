@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace QLBenhVien
+namespace QLBenhVien.Views
 {
     /// <summary>
-    /// Interaction logic for BhytWindow.xaml
+    /// Interaction logic for MedicineView.xaml
     /// </summary>
-    public partial class BHYTWindow : Window
+    public partial class MedicineView : UserControl
     {
-        public BHYTWindow()
+        public MedicineView()
         {
             InitializeComponent();
         }
