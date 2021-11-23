@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QLBenhVien.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,20 @@ using System.Threading.Tasks;
 
 namespace QLBenhVien.Model
 {
-    class BillList
+    class BillList:BaseViewModel
     {
         public int IdMR { get; set; }
-        public string PatientName { get; set; }
-        public string CodeBHYT { get; set; }
-        //public decimal Reduction { get; set; }
-        //public string NameLocation { get; set; }
-        //public decimal PriceLocation { get; set; }
 
-        //public DateTime DateInMR { get; set; }
+        string _PatientName;
+        public string PatientName { get => _PatientName; set { _PatientName = value; OnPropertyChanged(); } }
 
-        public decimal TotalFee { get; set; }
-        public decimal? Owed { get; set; }
+        string _CodeBHYT;
+        public string CodeBHYT { get => _CodeBHYT; set { _CodeBHYT = value; OnPropertyChanged(); } }
+
+        decimal _TotalFee;
+        public decimal TotalFee { get => _TotalFee; set { _TotalFee = value; OnPropertyChanged(); } }
+
+        decimal? _Owed;
+        public decimal? Owed { get => _Owed; set { _Owed = value; OnPropertyChanged(); } }
     }
 }

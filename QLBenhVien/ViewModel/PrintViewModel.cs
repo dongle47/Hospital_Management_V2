@@ -253,7 +253,15 @@ namespace QLBenhVien.ViewModel
             }
             );
 
-            ExportCommand = new RelayCommand<Object>((p) => { return true; }, (p) =>
+            ExportCommand = new RelayCommand<Object>((p) => 
+            { 
+                if(NamePatient != null && NamePatient != "")
+                {
+                    return true;
+                }
+                return false;
+
+            }, (p) =>
             {
                 DataTable table = new DataTable();
                 table.Columns.Add("Info", typeof(String));

@@ -89,8 +89,8 @@ namespace QLBenhVien.ViewModel
                 }
                 var displayList = DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName == DisplayName);
                 string newDescr = DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName == DisplayName).Select(x=>x.Description).SingleOrDefault();
-
-                if (displayList.Count() != 0 && newDescr == Description)
+                var checkPrice = DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName == DisplayName).Select(x => x.Price).SingleOrDefault();
+                if (displayList.Count() != 0 && newDescr == Description && checkPrice == Price)
                 {
                     return false;
                 }

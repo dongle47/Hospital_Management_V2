@@ -9,15 +9,20 @@
 
 namespace QLBenhVien.Model
 {
+    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class HospitalFee
+    public partial class HospitalFee:BaseViewModel
     {
         public int IdMedicalRecord { get; set; }
-        public decimal TotalFee { get; set; }
-        public Nullable<decimal> Owed { get; set; }
-    
+
+        decimal _TotalFee;
+        public decimal TotalFee { get => _TotalFee; set { _TotalFee = value; OnPropertyChanged(); } }
+
+        Nullable<decimal> _Owed;
+        public Nullable<decimal> Owed { get => _Owed; set { _Owed = value; OnPropertyChanged(); } }
+
         public virtual MedicalRecord MedicalRecord { get; set; }
     }
 }

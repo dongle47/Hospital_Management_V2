@@ -35,7 +35,8 @@
         <Style x:Key="NavigationButton" TargetType="Button">
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="Background" Value="#94d2bd" />
+                    <Setter Property="Background" Value="#5e60ce" />
+                    <Setter Property="Foreground" Value="#fefae0" />
                 </Trigger>
             </Style.Triggers>
         </Style>
