@@ -140,7 +140,9 @@ namespace QLBenhVien.ViewModel
             }
             );
 
-            SearchCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SearchCommand = new RelayCommand<object>((p) => 
+            { return true; }, 
+            (p) =>
             {
                 if (TextSearch == null || TextSearch == "")
                 {
