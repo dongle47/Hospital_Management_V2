@@ -185,8 +185,8 @@
                         
                         <WrapPanel Grid.Row="4">
                             <TextBox Name="CodeBHYT" Text="{Binding CodeBHYT, UpdateSourceTrigger=PropertyChanged}" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Số bảo hiểm" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <DatePicker Name="DateStart" SelectedDate="{Binding DateStart, StringFormat='dd/MM/yy'}" Width="100" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày bắt đầu" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                            <DatePicker Name="DateEnd" SelectedDate="{Binding DateEnd, StringFormat='dd/MM/yy'}" Width="100" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <TextBox Name="DateStart" Text="{Binding DateStart, UpdateSourceTrigger=PropertyChanged}" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày bắt đầu" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Name="DateEnd" Text="{Binding DateEnd, UpdateSourceTrigger=PropertyChanged}" Margin="5 12 15 11" Padding="0" materialDesign:HintAssist.Hint="Ngày kết thúc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </WrapPanel>
                     
                         <Grid Grid.Row="5">

@@ -285,7 +285,8 @@ namespace QLBenhVien.ViewModel
             {
                 if(SelectedItem != null)
                 {
-                    Global.setGlobalText(SelectedPatient.DisplayName);
+                    var NamePatient = DataProvider.Ins.DB.Patients.Where(x => x.Id == IdPatient).Select(x => x.DisplayName).SingleOrDefault();
+                    Global.setGlobalText(NamePatient);
                     PrescriptionWindow f = new PrescriptionWindow();
                     f.displayName.Text = "ĐT của " + Global.globalText;
                     f.ShowDialog();
