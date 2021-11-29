@@ -178,3 +178,7 @@ C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\IncomeWindow.g.
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\IncomeWindow.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\DetailPrescriptionView.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\DetailPrescriptionView.baml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\IncomeView.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\IncomeView.baml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\StatisWindow.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\StatisWindow.baml

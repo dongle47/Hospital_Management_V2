@@ -46,7 +46,7 @@ namespace QLBenhVien.ViewModel
             List = new ObservableCollection<Income>(DataProvider.Ins.DB.Incomes.OrderByDescending(x=>x.Id));
 
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
-                
+                List = new ObservableCollection<Income>(DataProvider.Ins.DB.Incomes.OrderByDescending(x => x.Id));
             }
             );
 

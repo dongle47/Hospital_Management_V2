@@ -18,8 +18,8 @@ namespace QLBenhVien.ViewModel
         public ICommand PrescriptionCommand { get; set; }
         public ICommand BillCommand { get; set; }
         public ICommand PrintCommand { get; set; }
-        public ICommand income { get; set; }
-
+        public ICommand IncomeCommand { get; set; }
+        public ICommand StatisCommand { get; set; }
         public MainViewModel()
         {
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
@@ -77,9 +77,18 @@ namespace QLBenhVien.ViewModel
             }
             );
 
-            income = new RelayCommand<object>((p) => { return true; }, (p) => {
+            IncomeCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
                 IncomeWindow f = new IncomeWindow();
-                f.ShowDialog();
+                f.Show();
+                f.Close();
+            }
+            );
+
+            StatisCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                StatisWindow f = new StatisWindow();
+                f.Show();
             }
             );
         }

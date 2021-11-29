@@ -79,6 +79,7 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
                     <Button Style="{StaticResource NavigationButton}" x:Name="btnpatient" Grid.Row="0" ToolTip="Bệnh nhân" Click="Button_Click_3" GotFocus="Button_GotFocus">
@@ -216,7 +217,7 @@
                         </Grid>
                     </Button>
 
-                    <Button Command="{Binding income}" Style="{StaticResource NavigationButton}" Grid.Row="9" ToolTip="NDT" Click="Button_Click_9">
+                    <Button Command="{Binding IncomeCommand}" Style="{StaticResource NavigationButton}" Grid.Row="9" ToolTip="NDT" Click="Button_Click_9">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>
@@ -231,11 +232,26 @@
                         </Grid>
                     </Button>
 
+                    <Button Command="{Binding StatisCommand}" Style="{StaticResource NavigationButton}" Grid.Row="10" ToolTip="NDT">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="Thống kê" HorizontalAlignment="Center"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon Height="24" Width="24" Kind="ChartBar" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+
                 </Grid>
             </Grid>
 
             <materialDesign:Card Grid.Column="1" Margin="5 0 5 0">
-                <Grid x:Name="MainContent">
+                <Grid x:Name="MainContent" x:FieldModifier="public">
 
 
                 </Grid>

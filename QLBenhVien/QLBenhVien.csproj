@@ -169,6 +169,9 @@
     <Compile Include="SickWindow.xaml.cs">
       <DependentUpon>SickWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatisWindow.xaml.cs">
+      <DependentUpon>StatisWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UsePrescriptionWindow.xaml.cs">
       <DependentUpon>UsePrescriptionWindow.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,7 @@
     <Compile Include="ViewModel\PatientViewModel.cs" />
     <Compile Include="ViewModel\PrescriptionViewModel.cs" />
     <Compile Include="ViewModel\SickViewModel.cs" />
+    <Compile Include="ViewModel\StatisViewModel.cs" />
     <Compile Include="ViewModel\UsePrescriptionViewModel.cs" />
     <Compile Include="Views\BHYTView.xaml.cs">
       <DependentUpon>BHYTView.xaml</DependentUpon>
@@ -204,6 +208,9 @@
     </Compile>
     <Compile Include="Views\DetailPrescriptionView.xaml.cs">
       <DependentUpon>DetailPrescriptionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\IncomeView.xaml.cs">
+      <DependentUpon>IncomeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LocationView.xaml.cs">
       <DependentUpon>LocationView.xaml</DependentUpon>
@@ -289,6 +296,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StatisWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UsePrescriptionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -310,6 +321,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DetailPrescriptionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\IncomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

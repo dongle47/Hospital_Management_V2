@@ -19,6 +19,7 @@
     <viewmodel:DetailBillViewModel x:Key="DetailBillVM"></viewmodel:DetailBillViewModel>
     <viewmodel:PrintViewModel x:Key="PrinttVM"></viewmodel:PrintViewModel>
     <viewmodel:IncomeViewModel x:Key="IncomeVM"></viewmodel:IncomeViewModel>
+    <viewmodel:StatisViewModel x:Key="StatisVM"></viewmodel:StatisViewModel>
 
 
 

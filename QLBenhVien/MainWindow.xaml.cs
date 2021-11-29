@@ -104,7 +104,9 @@ namespace QLBenhVien
 
         private void Button_Click_9(object sender, RoutedEventArgs e)
         {
-            
+            MainContent.Children.Clear();
+            Views.IncomeView usercontrol = new Views.IncomeView();
+            MainContent.Children.Add(usercontrol);
         }
     }
 }
