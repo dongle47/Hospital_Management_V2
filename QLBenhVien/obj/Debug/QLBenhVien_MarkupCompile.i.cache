@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\App.xaml
-24-1256444587
+261496347345
 2-1556844510
-61-1610023607
+65-1317203243
 25-1678404173
-BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;LoginWindow.xaml;MainWindow.xaml;PrintWindow.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;Views\BHYTView.xaml;Views\BillView.xaml;Views\LocationView.xaml;Views\MedicalRecordView.xaml;Views\MedicineView.xaml;Views\PatientView.xaml;Views\PrescriptionView.xaml;Views\PrintView.xaml;Views\SickView.xaml;
+BillWindow.xaml;DetailBillWindow.xaml;DetailPrescriptionWindow.xaml;IncomeWindow.xaml;LoginWindow.xaml;MainWindow.xaml;PrintWindow.xaml;MedicalRecordWindow.xaml;MedicineWindow.xaml;PatientWindow.xaml;PrescriptionWindow.xaml;ResourceXAML\MainResource.xaml;SickWindow.xaml;UsePrescriptionWindow.xaml;UserControlD\ControlBarUC.xaml;UserControlD\TestControl.xaml;Views\BHYTView.xaml;Views\BillView.xaml;Views\DetailPrescriptionView.xaml;Views\LocationView.xaml;Views\MedicalRecordView.xaml;Views\MedicineView.xaml;Views\PatientView.xaml;Views\PrescriptionView.xaml;Views\PrintView.xaml;Views\SickView.xaml;
 
 True
 

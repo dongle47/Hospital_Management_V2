@@ -9,11 +9,10 @@
 
 namespace QLBenhVien.Model
 {
-    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Prescription:BaseViewModel
+    public partial class Prescription
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Prescription()
@@ -23,10 +22,7 @@ namespace QLBenhVien.Model
         }
     
         public int Id { get; set; }
-
-        string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
-
+        public string DisplayName { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
         public Nullable<decimal> TotalPrice { get; set; }
     

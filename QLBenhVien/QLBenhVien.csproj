@@ -95,6 +95,12 @@
     <Compile Include="DetailPrescriptionWindow.xaml.cs">
       <DependentUpon>DetailPrescriptionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IncomeWindow.xaml.cs">
+      <DependentUpon>IncomeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Income.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="PrintWindow.xaml.cs">
       <DependentUpon>PrintWindow.xaml</DependentUpon>
     </Compile>
@@ -179,6 +185,7 @@
     <Compile Include="ViewModel\DetailBillViewModel.cs" />
     <Compile Include="ViewModel\DetailPrescriptionViewModel.cs" />
     <Compile Include="ViewModel\Global.cs" />
+    <Compile Include="ViewModel\IncomeViewModel.cs" />
     <Compile Include="ViewModel\LocationViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\PrintViewModel.cs" />
@@ -194,6 +201,9 @@
     </Compile>
     <Compile Include="Views\BillView.xaml.cs">
       <DependentUpon>BillView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DetailPrescriptionView.xaml.cs">
+      <DependentUpon>DetailPrescriptionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LocationView.xaml.cs">
       <DependentUpon>LocationView.xaml</DependentUpon>
@@ -225,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="DetailPrescriptionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IncomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -292,6 +306,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\BillView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DetailPrescriptionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

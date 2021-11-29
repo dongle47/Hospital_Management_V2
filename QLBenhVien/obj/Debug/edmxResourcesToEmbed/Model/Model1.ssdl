@@ -18,6 +18,15 @@
     <Property Name="TotalFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Owed" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
+  <EntityType Name="Income">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdMR" Type="int" />
+    <Property Name="Money" Type="bigint" />
+    <Property Name="Date" Type="datetime" />
+  </EntityType>
   <EntityType Name="Location">
     <Key>
       <PropertyRef Name="Id" />
@@ -203,6 +212,7 @@
   <EntityContainer Name="QLBenhVienModelStoreContainer">
     <EntitySet Name="BHYT" EntityType="Self.BHYT" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HospitalFee" EntityType="Self.HospitalFee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MedicalRecord" EntityType="Self.MedicalRecord" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />

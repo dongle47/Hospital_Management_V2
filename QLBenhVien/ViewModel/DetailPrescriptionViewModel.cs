@@ -81,6 +81,7 @@ namespace QLBenhVien.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
+        public ICommand BackCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
 
 
@@ -201,6 +202,11 @@ namespace QLBenhVien.ViewModel
                 var Prescription = DataProvider.Ins.DB.Prescriptions.Where(x => x.Id == IdPrescription).SingleOrDefault();
                 Prescription.TotalPrice = TotalPricePrescription;
                 DataProvider.Ins.DB.SaveChanges();
+            }
+            );
+
+            BackCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+
             }
             );
 

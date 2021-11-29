@@ -23,6 +23,15 @@
           <Property Name="TotalFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Owed" Type="decimal" Precision="18" Scale="0" />
         </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdMR" Type="int" />
+          <Property Name="Money" Type="bigint" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
         <EntityType Name="Location">
           <Key>
             <PropertyRef Name="Id" />
@@ -208,6 +217,7 @@
         <EntityContainer Name="QLBenhVienModelStoreContainer">
           <EntitySet Name="BHYT" EntityType="Self.BHYT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HospitalFee" EntityType="Self.HospitalFee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Income" EntityType="Self.Income" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Location" EntityType="Self.Location" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedicalRecord" EntityType="Self.MedicalRecord" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Medicine" EntityType="Self.Medicine" Schema="dbo" store:Type="Tables" />
@@ -257,6 +267,7 @@
         <EntityContainer Name="QLBenhVienEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BHYTs" EntityType="QLBenhVienModel.BHYT" />
           <EntitySet Name="HospitalFees" EntityType="QLBenhVienModel.HospitalFee" />
+          <EntitySet Name="Incomes" EntityType="QLBenhVienModel.Income" />
           <EntitySet Name="Locations" EntityType="QLBenhVienModel.Location" />
           <EntitySet Name="MedicalRecords" EntityType="QLBenhVienModel.MedicalRecord" />
           <EntitySet Name="Medicines" EntityType="QLBenhVienModel.Medicine" />
@@ -318,6 +329,15 @@
           <Property Name="TotalFee" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Owed" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="MedicalRecord" Relationship="QLBenhVienModel.FK_HospitalFee_MedicalRecord" FromRole="HospitalFee" ToRole="MedicalRecord" />
+        </EntityType>
+        <EntityType Name="Income">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdMR" Type="Int32" />
+          <Property Name="Money" Type="Int64" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -538,6 +558,16 @@
                 <ScalarProperty Name="Owed" ColumnName="Owed" />
                 <ScalarProperty Name="TotalFee" ColumnName="TotalFee" />
                 <ScalarProperty Name="IdMedicalRecord" ColumnName="IdMedicalRecord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Incomes">
+            <EntityTypeMapping TypeName="QLBenhVienModel.Income">
+              <MappingFragment StoreEntitySet="Income">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="IdMR" ColumnName="IdMR" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

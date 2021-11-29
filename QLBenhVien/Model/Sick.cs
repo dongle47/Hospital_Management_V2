@@ -9,11 +9,10 @@
 
 namespace QLBenhVien.Model
 {
-    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Sick:BaseViewModel
+    public partial class Sick
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Sick()
@@ -22,10 +21,8 @@ namespace QLBenhVien.Model
         }
     
         public int Id { get; set; }
-
-        string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
-
+        public string DisplayName { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }
     }

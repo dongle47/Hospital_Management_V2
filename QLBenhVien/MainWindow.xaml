@@ -23,7 +23,7 @@
         
         Name="window"
         DataContext="{StaticResource MainVM}"
-        Title="Màn hình chính" Height="500" Width="900">
+        Title="Màn hình chính" Height="550" Width="900">
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -69,6 +69,7 @@
                     </Grid.Resources>
 
                     <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -211,6 +212,21 @@
                             </Grid>
                             <Grid Grid.Row="1">
                                 <materialDesign:PackIcon Height="24" Width="24" Kind="FileWord" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Grid>
+                    </Button>
+
+                    <Button Command="{Binding income}" Style="{StaticResource NavigationButton}" Grid.Row="9" ToolTip="NDT" Click="Button_Click_9">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="Doanh thu" HorizontalAlignment="Center"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <materialDesign:PackIcon Height="24" Width="24" Kind="Cash" HorizontalAlignment="Center"/>
                             </Grid>
                         </Grid>
                     </Button>

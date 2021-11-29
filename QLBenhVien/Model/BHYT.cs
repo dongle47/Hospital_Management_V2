@@ -9,26 +9,17 @@
 
 namespace QLBenhVien.Model
 {
-    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class BHYT:BaseViewModel
+    public partial class BHYT
     {
         public int IdPatient { get; set; }
-
-        string _CodeBHYT;
-        public string CodeBHYT { get => _CodeBHYT; set { _CodeBHYT = value; OnPropertyChanged(); } }
-
-        Nullable<System.DateTime> _DateStart;
-        public Nullable<System.DateTime> DateStart { get => _DateStart; set { _DateStart = value; OnPropertyChanged(); } }
-
-        Nullable<System.DateTime> _DateEnd;
-        public Nullable<System.DateTime> DateEnd { get => _DateEnd; set { _DateEnd = value; OnPropertyChanged(); } }
-
-        string _Reduction;
-        public string Reduction { get => _Reduction; set { _Reduction = value; OnPropertyChanged(); } }
-
+        public string CodeBHYT { get; set; }
+        public Nullable<System.DateTime> DateStart { get; set; }
+        public Nullable<System.DateTime> DateEnd { get; set; }
+        public string Reduction { get; set; }
+    
         public virtual Patient Patient { get; set; }
     }
 }

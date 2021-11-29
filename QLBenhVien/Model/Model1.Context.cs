@@ -27,6 +27,7 @@ namespace QLBenhVien.Model
     
         public virtual DbSet<BHYT> BHYTs { get; set; }
         public virtual DbSet<HospitalFee> HospitalFees { get; set; }
+        public virtual DbSet<Income> Incomes { get; set; }
         public virtual DbSet<Location> Locations { get; set; }
         public virtual DbSet<MedicalRecord> MedicalRecords { get; set; }
         public virtual DbSet<Medicine> Medicines { get; set; }

@@ -129,13 +129,28 @@ namespace QLBenhVien.ViewModel
                 decimal reduceMoney = (Decimal.Parse(reduction) / 100) * hospitalFee.TotalFee;
 
                 hospitalFee.TotalFee -= Math.Round(reduceMoney);
+
+                int incomeMoney = Convert.ToInt32( hospitalFee.Owed);
                 hospitalFee.Owed = Math.Round((decimal)hospitalFee.Owed - reduceMoney - Decimal.Parse(Money));
 
                 if (hospitalFee.Owed < 0)
                 {
                     hospitalFee.Owed = 0;
                 }
+                else
+                {
+                    incomeMoney = Convert.ToInt32( Money);
+                }
 
+                DataProvider.Ins.DB.SaveChanges();
+
+                var income = new Income()
+                {
+                    IdMR = SelectedItem.IdMR,
+                    Money = Convert.ToInt32(incomeMoney),
+                    Date = DateTime.Now
+                };
+                DataProvider.Ins.DB.Incomes.Add(income);
                 DataProvider.Ins.DB.SaveChanges();
             }
             );

@@ -12,12 +12,11 @@ namespace QLBenhVien.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class HospitalFee
+    public partial class Income
     {
-        public int IdMedicalRecord { get; set; }
-        public decimal TotalFee { get; set; }
-        public Nullable<decimal> Owed { get; set; }
-    
-        public virtual MedicalRecord MedicalRecord { get; set; }
+        public int Id { get; set; }
+        public Nullable<int> IdMR { get; set; }
+        public Nullable<long> Money { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
     }
 }

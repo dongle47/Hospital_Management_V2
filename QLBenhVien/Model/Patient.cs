@@ -9,11 +9,10 @@
 
 namespace QLBenhVien.Model
 {
-    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Patient:BaseViewModel
+    public partial class Patient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
@@ -22,25 +21,13 @@ namespace QLBenhVien.Model
         }
     
         public int Id { get; set; }
-
-        string _DisplayName;
-        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
-
-        System.DateTime _DateOfBirth;
-        public DateTime DateOfBirth { get => _DateOfBirth; set { _DateOfBirth = value; OnPropertyChanged(); } }
-
-        string _Address;
-        public string Address { get => _Address; set { _Address = value; OnPropertyChanged(); } }
-
-        string _Phone;
-        public string Phone { get => _Phone; set { _Phone = value; OnPropertyChanged(); } }
-
-        string _Sex;
-        public string Sex { get => _Sex; set { _Sex = value; OnPropertyChanged(); } }
-
-        string _Religion;
-        public string Religion { get => _Religion; set { _Religion = value; OnPropertyChanged(); } }
-
+        public string DisplayName { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
+        public string Sex { get; set; }
+        public string Religion { get; set; }
+    
         public virtual BHYT BHYT { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }

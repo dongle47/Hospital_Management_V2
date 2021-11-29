@@ -174,3 +174,7 @@ C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\Prescript
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\PrescriptionView.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\PrintView.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\PrintView.baml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\IncomeWindow.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\IncomeWindow.baml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\DetailPrescriptionView.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\DetailPrescriptionView.baml

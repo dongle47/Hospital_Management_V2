@@ -21,6 +21,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Incomes">
+      <EntityTypeMapping TypeName="QLBenhVienModel.Income">
+        <MappingFragment StoreEntitySet="Income">
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="IdMR" ColumnName="IdMR" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Locations">
       <EntityTypeMapping TypeName="QLBenhVienModel.Location">
         <MappingFragment StoreEntitySet="Location">
