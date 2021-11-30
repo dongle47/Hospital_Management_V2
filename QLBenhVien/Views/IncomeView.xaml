@@ -71,7 +71,7 @@
 
                         <Grid Grid.Row="0" Margin="0 5 0 0">
                             <CheckBox x:Name="MaterialDesignTextAreaTextBoxEnabledComboBox"
-                              IsChecked="True"
+                              IsChecked="False"
                               Margin="32,0,0,8">
                                 Tìm kiếm theo ngày
                             </CheckBox>
