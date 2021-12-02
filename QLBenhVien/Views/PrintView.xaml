@@ -175,7 +175,7 @@
                         </WrapPanel>
 
                         <Grid Grid.Row="5">
-                            <TextBox Name="Nothing" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 5" materialDesign:HintAssist.Hint="Ghi chú" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox Name="Nothing" Text="{Binding SexPatient, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5 5 5 5" materialDesign:HintAssist.Hint="Giới tính" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </Grid>
 
                     </Grid>

@@ -89,6 +89,7 @@ namespace QLBenhVien.ViewModel
             {
                 StatisWindow f = new StatisWindow();
                 f.Show();
+                f.Close();
             }
             );
         }

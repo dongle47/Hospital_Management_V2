@@ -9,10 +9,11 @@
 
 namespace QLBenhVien.Model
 {
+    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class Location:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Location()
@@ -21,9 +22,11 @@ namespace QLBenhVien.Model
         }
     
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public decimal Price { get; set; }
-    
+        string _DisplayName { get; set; }
+        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+        decimal _Price { get; set; }
+        public decimal Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }
     }

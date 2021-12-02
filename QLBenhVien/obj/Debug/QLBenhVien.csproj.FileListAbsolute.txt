@@ -182,3 +182,6 @@ C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\IncomeVie
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\IncomeView.baml
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\StatisWindow.g.cs
 C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\StatisWindow.baml
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\bin\Debug\De.TorstenMandelkow.MetroChart.dll
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\StatisView.g.cs
+C:\Users\PC\Desktop\CNPM\DoAn\QLBenhVien_V2\QLBenhVien\obj\Debug\Views\StatisView.baml

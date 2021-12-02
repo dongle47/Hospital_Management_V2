@@ -9,19 +9,31 @@
 
 namespace QLBenhVien.Model
 {
+    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class MedicalRecord
+    public partial class MedicalRecord:BaseViewModel
     {
         public int Id { get; set; }
-        public int IdPatient { get; set; }
-        public int IdSick { get; set; }
-        public Nullable<int> IdPrescription { get; set; }
-        public int IdLocation { get; set; }
-        public Nullable<System.DateTime> DateIn { get; set; }
-        public Nullable<System.DateTime> DateOut { get; set; }
-    
+        int _IdPatient;
+        public int IdPatient { get => _IdPatient; set { _IdPatient = value; OnPropertyChanged(); } }
+
+        int _IdSick;
+        public int IdSick { get => _IdSick; set { _IdSick = value; OnPropertyChanged(); } }
+
+        Nullable<int> _IdPrescription;
+        public Nullable<int> IdPrescription { get => _IdPrescription; set { _IdPrescription = value; OnPropertyChanged(); } }
+
+        int _IdLocation;
+        public int IdLocation { get => _IdLocation; set { _IdLocation = value; OnPropertyChanged(); } }
+
+        Nullable<System.DateTime> _DateIn;
+        public Nullable<System.DateTime> DateIn { get => _DateIn; set { _DateIn = value; OnPropertyChanged(); } }
+
+        Nullable<System.DateTime> _DateOut;
+        public Nullable<System.DateTime> DateOut { get => _DateOut; set { _DateOut = value; OnPropertyChanged(); } }
+
         public virtual HospitalFee HospitalFee { get; set; }
         public virtual Location Location { get; set; }
         public virtual Patient Patient { get; set; }

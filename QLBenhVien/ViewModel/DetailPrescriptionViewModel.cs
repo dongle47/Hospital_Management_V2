@@ -76,12 +76,15 @@ namespace QLBenhVien.ViewModel
         private decimal _PriceMedicine;
         public decimal PriceMedicine { get => _PriceMedicine; set { _PriceMedicine = value; OnPropertyChanged(); } }
 
+        private string _TextSearch;
+        public string TextSearch { get => _TextSearch; set { _TextSearch = value; OnPropertyChanged(); } }
 
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand ConfirmCommand { get; set; }
         public ICommand BackCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
         public ICommand LoadedWindowCommand { get; set; }
 
 
@@ -212,6 +215,18 @@ namespace QLBenhVien.ViewModel
 
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
                 List = new ObservableCollection<QuantityMedicine>(DataProvider.Ins.DB.QuantityMedicines.Where(x => x.IdPrescription == IdPrescription));
+            }
+            );
+
+            SearchCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                if (TextSearch == null)
+                {
+                    Medicine = new ObservableCollection<Medicine>(DataProvider.Ins.DB.Medicines);
+                }
+                else
+                {
+                    Medicine = new ObservableCollection<Medicine>(DataProvider.Ins.DB.Medicines.Where(x => x.DisplayName.Contains(TextSearch)));
+                }
             }
             );
 

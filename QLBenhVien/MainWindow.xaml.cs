@@ -108,5 +108,12 @@ namespace QLBenhVien
             Views.IncomeView usercontrol = new Views.IncomeView();
             MainContent.Children.Add(usercontrol);
         }
+
+        private void Button_Click_10(object sender, RoutedEventArgs e)
+        {
+            MainContent.Children.Clear();
+            Views.StatisView usercontrol = new Views.StatisView();
+            MainContent.Children.Add(usercontrol);
+        }
     }
 }

@@ -84,8 +84,8 @@
                             <GridViewColumn Header="Loại bệnh" DisplayMemberBinding="{Binding Sick.DisplayName}"></GridViewColumn>
                             <GridViewColumn Header="Mã đơn thuốc" DisplayMemberBinding="{Binding Prescription.Id}"></GridViewColumn>
                             <GridViewColumn Header="Nơi điều trị" DisplayMemberBinding="{Binding Location.DisplayName}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày vào" DisplayMemberBinding="{Binding DateIn, StringFormat='dd/MM/yy'}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày ra" DisplayMemberBinding="{Binding DateOut, StringFormat='dd/MM/yy'}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày vào" DisplayMemberBinding="{Binding DateIn, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
+                            <GridViewColumn Header="Ngày ra" DisplayMemberBinding="{Binding DateOut, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

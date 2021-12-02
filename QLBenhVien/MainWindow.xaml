@@ -232,7 +232,7 @@
                         </Grid>
                     </Button>
 
-                    <Button Command="{Binding StatisCommand}" Style="{StaticResource NavigationButton}" Grid.Row="10" ToolTip="NDT">
+                    <Button Command="{Binding StatisCommand}" Style="{StaticResource NavigationButton}" Grid.Row="10" ToolTip="NDT" Click="Button_Click_10">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition></RowDefinition>

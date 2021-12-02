@@ -9,6 +9,7 @@
              xmlns:uc="clr-namespace:QLBenhVien.UserControlD"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
              TextElement.Foreground="{DynamicResource MaterialDesignBody}"
              TextElement.FontWeight="Regular"
              TextElement.FontSize="13"
@@ -22,100 +23,118 @@
              
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition ></RowDefinition>
-        </Grid.RowDefinitions>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
 
-        <materialDesign:Card Grid.Row="0" Margin="5">
+        <materialDesign:Card Grid.Column="0" Margin="0 0 5 0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <materialDesign:Card Grid.Row="0" Margin="0 0 0 5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="200" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Button Style="{DynamicResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
-                        </Button>
-                        <TextBox Grid.Column="1"
-                                 Margin="8 0 0 0"
-                                 materialDesign:HintAssist.Hint="Tìm kiếm bằng mã bệnh án"
-                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
-                                 BorderThickness="0"
-                                 MinWidth="200"
-                                 Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 VerticalAlignment="Center" />
-                        <Button Style="{DynamicResource MaterialDesignToolButton}"
-                                IsDefault="True"
-                                Command="{Binding SearchMrCommand}"
-                                Grid.Column="2">
-                            <materialDesign:PackIcon Kind="Send" Opacity=".56" Margin="8 0 0 0"/>
-                        </Button>
-                    </Grid>
-                </materialDesign:Card>
-
-                <materialDesign:Card Grid.Row="1" Margin="0 0 0 0">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <Grid Grid.Row="0" Margin="0 5 0 0">
-                            <CheckBox x:Name="MaterialDesignTextAreaTextBoxEnabledComboBox"
-                              IsChecked="False"
-                              Margin="32,0,0,8">
-                                Tìm kiếm theo ngày
-                            </CheckBox>
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox Grid.Column="1"
+                                     Margin="10 0 0 0"
+                                     materialDesign:HintAssist.Hint="Tìm kiếm bằng mã bệnh án"
+                                     materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                     BorderThickness="0"
+                                     MinWidth="200"
+                                     Text="{Binding TextSearch, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     VerticalAlignment="Center" />
+
+                            <Button Margin="10 5 0 0" Grid.Column="2" Command="{Binding SearchCommand}" Content="{materialDesign:PackIcon magnify}" ToolTip="Icon" />
                         </Grid>
 
-                        <Grid Grid.Row="1"
-                      IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignTextAreaTextBoxEnabledComboBox}"
-                      >
-                            <WrapPanel>
-                                <DatePicker Width="100"
-                                    Margin="5 5 10 5"
-                                    SelectedDate="{Binding DateStart, StringFormat='dd/MM/yyyy'}"
-                                    materialDesign:HintAssist.Hint="Ngày bắt đầu"
-                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                                <DatePicker Width="100"
-                                    Margin="5 5 15 5"
-                                    SelectedDate="{Binding DateEnd}"
-                                    materialDesign:HintAssist.Hint="Ngày kết thúc"
-                                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+                            <Grid Grid.Row="0" Margin="0 5 0 0">
+                                <CheckBox x:Name="MaterialDesignTextAreaTextBoxEnabledComboBox"
+                                          IsChecked="False"
+                                          Command="{Binding CheckDateCommand}"
+                                          Margin="32,0,0,8">
+                                    Tìm kiếm theo ngày
+                                </CheckBox>
+                            </Grid>
 
-                                <Button Command="{Binding SearchDate}" Content="{materialDesign:PackIcon FindReplace}" ToolTip="Icon" />
-                            </WrapPanel>
+                            <Grid Grid.Row="1" 
+                                  IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignTextAreaTextBoxEnabledComboBox}"
+                                      >
+                                <WrapPanel>
+                                    <DatePicker Width="100"
+                                                Margin="5 5 10 5"
+                                                SelectedDate="{Binding DateStart, StringFormat='dd/MM/yyyy'}"
+                                                materialDesign:HintAssist.Hint="Ngày bắt đầu"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                                    <Button Command="{Binding FlagDateCommand}" Style="{DynamicResource MaterialDesignToolButton}">
+                                        <materialDesign:PackIcon Kind="DotsHorizontal" Opacity=".56" />
+                                    </Button>
+
+                                    <DatePicker Width="100"
+                                                Margin="5 5 15 5"
+                                                SelectedDate="{Binding DateEnd}"
+                                                materialDesign:HintAssist.Hint="Ngày kết thúc"
+                                                Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
+
+                                </WrapPanel>
+                            </Grid>
                         </Grid>
-
-
                     </Grid>
+                </materialDesign:Card>
+
+                <materialDesign:Card Grid.Row="1" VerticalAlignment="Stretch">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã bệnh án" DisplayMemberBinding="{Binding IdMR}"></GridViewColumn>
+                                    <GridViewColumn Header="Số tiền đóng" DisplayMemberBinding="{Binding Money}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày đóng" DisplayMemberBinding="{Binding Date, StringFormat='dd/MM/yyyy hh:mm:ss'}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
                 </materialDesign:Card>
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" VerticalAlignment="Stretch">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ListView ItemsSource="{Binding List}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Mã bệnh án" DisplayMemberBinding="{Binding IdMR}"></GridViewColumn>
-                            <GridViewColumn Header="Số tiền đóng" DisplayMemberBinding="{Binding Money}"></GridViewColumn>
-                            <GridViewColumn Header="Ngày đóng" DisplayMemberBinding="{Binding Date}"></GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-            </ScrollViewer>
+        <materialDesign:Card Grid.Column="1" Margin="5 0 0 0">
+            <Grid>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                    <chart:ClusteredColumnChart ChartSubTitle="{Binding StatusStatis}" ChartTitle="Thống kê doanh thu">
+                        <chart:ClusteredColumnChart.Series>
+                            <chart:ChartSeries DisplayMember="DisplayDate"
+                                               SeriesTitle="income"
+                                               ItemsSource="{Binding Path=StatisIncome, Mode=TwoWay}"
+                                               ValueMember="Count" />
+                        </chart:ClusteredColumnChart.Series>
+                    </chart:ClusteredColumnChart>
+                </ScrollViewer>
+            </Grid>
         </materialDesign:Card>
-
     </Grid>
 </UserControl>

@@ -50,25 +50,53 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition Height="auto"></RowDefinition>
+                        <RowDefinition Height="auto"></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
 
+                    <materialDesign:Card Grid.Row="0" Margin="5 5 5 0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Style="{DynamicResource MaterialDesignToolButton}">
+                                <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                            </Button>
+                            <TextBox Grid.Column="1"
+                                 Margin="8 0 0 0"
+                                 materialDesign:HintAssist.Hint="Tìm kiếm bằng tên loại bệnh"
+                                 materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                 BorderThickness="0"
+                                 MinWidth="200"
+                                 Text="{Binding TextSearch}"
+                                 VerticalAlignment="Center" />
+                            <Button Style="{DynamicResource MaterialDesignToolButton}"
+                                IsDefault="True"
+                                Command="{Binding SearchCommand}"
+                                Grid.Column="2">
+                                <materialDesign:PackIcon Kind="Send" Opacity=".56" Margin="8 0 0 0"/>
+                            </Button>
+                        </Grid>
+                    </materialDesign:Card>
 
                     <!--Element binding selected item-->
-                    <materialDesign:Card Grid.Row="0" Margin="5">
+                    <materialDesign:Card Grid.Row="1" Margin="5">
                         <WrapPanel>
                             <TextBox Text="{Binding DisplayNameMedicine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Tên thuốc" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             <TextBox Text="{Binding PriceMedicine, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Giá tiền" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                             <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="5" materialDesign:HintAssist.Hint="Số lượng" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                         </WrapPanel>
                     </materialDesign:Card>
-                    <materialDesign:Card Grid.Row="1" Margin="5">
+                    
+                    <materialDesign:Card Grid.Row="2" Margin="5">
                         <WrapPanel>
                             <Button Command="{Binding AddCommand}" Content="Thêm" Margin="5" Width="100"></Button>
                         </WrapPanel>
                     </materialDesign:Card>
 
-                    <materialDesign:Card Grid.Row="2" VerticalAlignment="Stretch">
+                    <materialDesign:Card Grid.Row="3" VerticalAlignment="Stretch">
                         <ScrollViewer VerticalScrollBarVisibility="Auto">
                             <ListView ItemsSource="{Binding Medicine}" SelectedItem="{Binding SelectedMedicine, Mode=TwoWay}">
                                 <ListView.View>

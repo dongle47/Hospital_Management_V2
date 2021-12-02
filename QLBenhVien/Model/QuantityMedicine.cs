@@ -9,17 +9,22 @@
 
 namespace QLBenhVien.Model
 {
+    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class QuantityMedicine
+    public partial class QuantityMedicine:BaseViewModel
     {
         public int Id { get; set; }
         public int IdPrescription { get; set; }
         public int IdMedicine { get; set; }
-        public int Quantity { get; set; }
-        public decimal Price { get; set; }
-    
+
+        int _Quantity;
+        public int Quantity { get => _Quantity; set { _Quantity = value; OnPropertyChanged(); } }
+
+        decimal _Price;
+        public decimal Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+
         public virtual Medicine Medicine { get; set; }
         public virtual Prescription Prescription { get; set; }
     }

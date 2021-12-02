@@ -9,10 +9,11 @@
 
 namespace QLBenhVien.Model
 {
+    using QLBenhVien.ViewModel;
     using System;
     using System.Collections.Generic;
     
-    public partial class Medicine
+    public partial class Medicine:BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Medicine()
@@ -21,10 +22,15 @@ namespace QLBenhVien.Model
         }
     
         public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public string Description { get; set; }
-        public decimal Price { get; set; }
-    
+        string _DisplayName;
+        public string DisplayName { get => _DisplayName; set { _DisplayName = value; OnPropertyChanged(); } }
+
+        string _Description;
+        public string Description { get => _Description; set { _Description = value; OnPropertyChanged(); } }
+
+        decimal _Price;
+        public decimal Price { get => _Price; set { _Price = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QuantityMedicine> QuantityMedicines { get; set; }
     }

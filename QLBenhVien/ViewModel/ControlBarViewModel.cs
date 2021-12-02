@@ -38,6 +38,7 @@ namespace QLBenhVien.ViewModel
                     if (w.WindowState != WindowState.Maximized)
                     {
                         w.WindowState = WindowState.Maximized;
+
                     }
                     else
                     {
